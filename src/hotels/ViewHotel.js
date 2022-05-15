@@ -29,9 +29,9 @@ const ViewHotel = ({ match, history }) => {
 
   const loadSellerHotel = async () => {
     let res = await read(match.params.hotelId);
-    // console.log(res);
     setHotel(res.data);
-    setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`);
+    setImage(`${res.data.image}`);
+    // setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`);
   };
 
   const handleClick = async (e) => {

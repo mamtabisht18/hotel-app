@@ -14,9 +14,23 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
       <div className="card mb-3">
         <div className="row no-gutters">
           <div className="col-md-4">
-            {hotel.image && hotel.image.contentType ? (
+            {/* {hotel.image && hotel.image.contentType ? (
               <img
                 src={`${process.env.REACT_APP_API}/hotel/image/${hotel._id}`}
+                alt="default hotel image"
+                className="card-image img img-fluid"
+              />
+            ) : (
+              <img
+                src="https://via.placeholder.com/900x500.png?text=MERN+Booking"
+                alt="default hotel image"
+                className="card-image img img-fluid"
+              />
+            )} */}
+
+{hotel.image  ? (
+              <img
+                src={`${hotel.image}`}
                 alt="default hotel image"
                 className="card-image img img-fluid"
               />

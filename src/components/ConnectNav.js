@@ -49,7 +49,7 @@ const ConnectNav = () => {
           description={`Joined ${moment(user.createdAt).fromNow()}`}
         />
       </Card>
-      {auth &&
+      {auth && false && 
         auth.user &&
         auth.user.stripe_seller &&
         auth.user.stripe_seller.charges_enabled && (

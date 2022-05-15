@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { login } from "../actions/auth";
 import LoginForm from "../components/LoginForm";
 import { useDispatch } from "react-redux";
+import { LOGIN_MOCK } from "../mocks/user";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("ryan@gmail.com");
@@ -14,7 +15,8 @@ const Login = ({ history }) => {
     e.preventDefault();
     console.log("SEND LOGIN DATA", { email, password });
     try {
-      let res = await login({ email, password });
+      // let res = await login({ email, password });
+      let res  = LOGIN_MOCK
 
       if (res.data) {
         console.log(

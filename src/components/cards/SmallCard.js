@@ -15,7 +15,7 @@ const SmallCard = ({
       <div className="card mb-3">
         <div className="row no-gutters">
           <div className="col-md-4">
-            {h.image && h.image.contentType ? (
+            {/* {h.image && h.image.contentType ? (
               <img
                 src={`${process.env.REACT_APP_API}/hotel/image/${h._id}`}
                 alt="default hotel image"
@@ -27,7 +27,21 @@ const SmallCard = ({
                 alt="default hotel image"
                 className="card-image img img-fluid"
               />
-            )}
+            )} */}
+
+            {h.image ? (
+              <img
+                src={`${h.image}`}
+                alt="default hotel image"
+                className="card-image img img-fluid"
+              />
+            ) : (
+              <img
+                src="https://via.placeholder.com/900x500.png?text=MERN+Booking"
+                alt="default hotel image"
+                className="card-image img img-fluid"
+              />
+            )}    
           </div>
           <div className="col-md-8">
             <div className="card-body">

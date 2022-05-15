@@ -1,4 +1,7 @@
 import axios from "axios";
+import { getSelectedHotel, HOTELS_MOCK } from "../mocks/hotel";
+import { searchHotels } from "../mocks/search-hotels";
+import { BOOKINGS_HOTELS_MOCK } from "../mocks/user-bookings";
 
 export const createHotel = async (token, data) =>
   await axios.post(`${process.env.REACT_APP_API}/create-hotel`, data, {
@@ -7,8 +10,11 @@ export const createHotel = async (token, data) =>
     },
   });
 
-export const allHotels = async () =>
-  await axios.get(`${process.env.REACT_APP_API}/hotels`);
+// export const allHotels = async () =>
+//   await axios.get(`${process.env.REACT_APP_API}/hotels`);
+
+export const allHotels = async () => HOTELS_MOCK
+
 
 export const diffDays = (from, to) => {
   const day = 24 * 60 * 60 * 1000;
@@ -32,8 +38,11 @@ export const deleteHotel = async (token, hotelId) =>
     },
   });
 
-export const read = async (hotelId) =>
-  await axios.get(`${process.env.REACT_APP_API}/hotel/${hotelId}`);
+// export const read = async (hotelId) =>
+//   await axios.get(`${process.env.REACT_APP_API}/hotel/${hotelId}`);
+
+  export const read = async (hotelId) => getSelectedHotel(hotelId)
+  
 
 export const updateHotel = async (token, data, hotelId) =>
   await axios.put(
@@ -46,19 +55,32 @@ export const updateHotel = async (token, data, hotelId) =>
     }
   );
 
-export const userHotelBookings = async (token) =>
-  await axios.get(`${process.env.REACT_APP_API}/user-hotel-bookings`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+// export const userHotelBookings = async (token) =>
+//   await axios.get(`${process.env.REACT_APP_API}/user-hotel-bookings`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
 
-export const isAlreadyBooked = async (token, hotelId) =>
-  await axios.get(`${process.env.REACT_APP_API}/is-already-booked/${hotelId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const userHotelBookings = async (token) => BOOKINGS_HOTELS_MOCK
 
-export const searchListings = async (query) =>
-  await axios.post(`${process.env.REACT_APP_API}/search-listings`, query);
+// export const isAlreadyBooked = async (token, hotelId) =>
+//   await axios.get(`${process.env.REACT_APP_API}/is-already-booked/${hotelId}`, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+
+export const isAlreadyBooked = async (token, hotelId) => {
+  return {
+    data: {
+      ok: false
+    }
+  }
+}
+
+// export const searchListings = async (query) =>
+//   await axios.post(`${process.env.REACT_APP_API}/search-listings`, query);
+
+export const searchListings = async (query) =>  searchHotels(query)
+ 
