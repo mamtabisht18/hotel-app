@@ -30,8 +30,8 @@ const ViewHotel = ({ match, history }) => {
   const loadSellerHotel = async () => {
     let res = await read(match.params.hotelId);
     setHotel(res.data);
-    setImage(`${res.data.image}`);
-    // setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`);
+    // setImage(`${res.data.image}`);
+    setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`);
   };
 
   const handleClick = async (e) => {
@@ -64,7 +64,7 @@ const ViewHotel = ({ match, history }) => {
         <div className="row">
           <div className="col-md-6">
             <br />
-            <img src={image} alt={hotel.title} className="img img-fluid m-2" />
+            <img src={image} alt={hotel.title} className="img img-fluid m-2 hotel-image" />
           </div>
 
           <div className="col-md-6">
