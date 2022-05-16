@@ -21,6 +21,13 @@ const TopNav = () => {
       <Link className="nav-link" to="/">
         Home
       </Link>
+      <li className="nav-link">
+            <Link              
+              to="/hotels/new"
+            >
+              Add Hotel
+            </Link>
+          </li>
 
       {auth !== null && (
         <Link className="nav-link" to="/dashboard">
