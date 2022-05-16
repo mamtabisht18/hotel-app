@@ -24,4 +24,14 @@
   width: 100%;
 }
 
+.banner{
+  background-image: url(./assets/banner.jpg);
+  background-size:contain;
+}
+
+
+
+.banner h1{
+  color: #fff;
+}
 
