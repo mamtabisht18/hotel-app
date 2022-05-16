@@ -15,9 +15,8 @@ const Login = ({ history }) => {
     e.preventDefault();
     console.log("SEND LOGIN DATA", { email, password });
     try {
-      // let res = await login({ email, password });
-      let res  = LOGIN_MOCK
-
+      let res = await login({ email, password });
+      
       if (res.data) {
         console.log(
           "SAVE USER RES IN REDUX AND LOCAL STORAGE THEN REDIRECT ===> "
