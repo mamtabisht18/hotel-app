@@ -24,16 +24,16 @@ const DashboardSeller = () => {
   };
 
   const handleClick = async () => {
-    setLoading(true);
-    try {
-      let res = await createConnectAccount(auth.token);
-      console.log(res); // get login link
-      window.location.href = res.data;
-    } catch (err) {
-      console.log(err);
-      toast.error("Stripe connect failed, Try again.");
-      setLoading(false);
-    }
+    // setLoading(true);
+    // try {
+    //   let res = await createConnectAccount(auth.token);
+    //   console.log(res); // get login link
+    //   window.location.href = res.data;
+    // } catch (err) {
+    //   console.log(err);
+    //   toast.error("Stripe connect failed, Try again.");
+    //   setLoading(false);
+    // }
   };
 
   const handleHotelDelete = async (hotelId) => {
@@ -103,7 +103,7 @@ const DashboardSeller = () => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5">
+      <div className="container-fluid bg-secondary p-5 nav-banner">
         <ConnectNav />
       </div>
 
@@ -112,9 +112,9 @@ const DashboardSeller = () => {
       </div>
 
       {auth &&
-      auth.user &&
-      auth.user.stripe_seller &&
-      auth.user.stripe_seller.charges_enabled
+      auth.user
+      // && auth.user.stripe_seller &&
+      // auth.user.stripe_seller.charges_enabled
         ? connected()
         : notConnected()}
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStore } from "react-redux";
-import { read, diffDays, isAlreadyBooked } from "../actions/hotel";
+import { read, diffDays, isAlreadyBooked, getDiscountedPrice } from "../actions/hotel";
 import { getSessionId } from "../actions/stripe";
 import moment from "moment";
 import { useSelector } from "react-redux";
@@ -44,20 +44,21 @@ const ViewHotel = ({ match, history }) => {
 
     setLoading(true);
     if (!auth) history.push("/login");
-    // console.log(auth.token, match.params.hotelId);
-    let res = await getSessionId(auth.token, match.params.hotelId);
-    // console.log("get sessionid resposne", res.data.sessionId);
-    const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
-    stripe
-      .redirectToCheckout({
-        sessionId: res.data.sessionId,
-      })
-      .then((result) => console.log(result));
+    history.push(`/payment/${hotel._id}`);
+    // // console.log(auth.token, match.params.hotelId);
+    // let res = await getSessionId(auth.token, match.params.hotelId);
+    // // console.log("get sessionid resposne", res.data.sessionId);
+    // const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
+    // stripe
+    //   .redirectToCheckout({
+    //     sessionId: res.data.sessionId,
+    //   })
+    //   .then((result) => console.log(result));
   };
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
+      <div className="container-fluid bg-secondary p-5 text-center banner">
         <h1>{hotel.title}</h1>
       </div>
       <div className="container-fluid">
@@ -70,7 +71,27 @@ const ViewHotel = ({ match, history }) => {
           <div className="col-md-6">
             <br />
             <b>{hotel.content}</b>
-            <p className="alert alert-info mt-3">${hotel.price}</p>
+            <p className="alert alert-info mt-3">
+
+{auth.hotelCount ? (
+       <>
+       <s>${hotel.price}</s> 
+       &nbsp;              
+              <b>{getDiscountedPrice(hotel.price)}</b>
+              &nbsp;
+              <span className="discount-per">10 % off</span>
+              
+       </>
+      ) : (
+        <>
+        ${hotel.price}
+        </>
+      )
+      
+      }
+      </p>
+              
+              
             <p className="card-text">
               <span className="float-right text-primary">
                 for {diffDays(hotel.from, hotel.to)}{" "}

@@ -20,14 +20,7 @@ const TopNav = () => {
     <div className="nav bg-light d-flex justify-content-between">
       <Link className="nav-link" to="/">
         Home
-      </Link>
-      <li className="nav-link">
-            <Link              
-              to="/hotels/new"
-            >
-              Add Hotel
-            </Link>
-          </li>
+      </Link>      
 
       {auth !== null && (
         <Link className="nav-link" to="/dashboard">

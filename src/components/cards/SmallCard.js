@@ -12,7 +12,7 @@ const SmallCard = ({
   const history = useHistory();
   return (
     <>
-      <div className="card mb-3">
+      <div className="card mb-3 small-cards"  style={{width:'100%', background:'white'}}>
         <div className="row no-gutters">
           <div className="col-md-4">
             {h.image && h.image.contentType ? (

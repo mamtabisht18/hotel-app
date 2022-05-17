@@ -11,9 +11,10 @@ const OrderModal = ({ session, orderedBy, showModal, setShowModal }) => {
       <p>Payment status: {session.payment_status}</p>
       <p>
         Amount total: {session.currency.toUpperCase()}{" "}
-        {session.amount_total / 100}
+        {/* {session.amount_total / 100} */}
+        {session.amount_total}
       </p>
-      <p>Stripe customer id: {session.customer}</p>
+      {/* <p>Stripe customer id: {session.customer}</p> */}
       <p>Customer: {orderedBy.name}</p>
     </Modal>
   );

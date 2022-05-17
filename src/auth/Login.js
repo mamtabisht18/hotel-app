@@ -4,6 +4,7 @@ import { login } from "../actions/auth";
 import LoginForm from "../components/LoginForm";
 import { useDispatch } from "react-redux";
 import { LOGIN_MOCK } from "../mocks/user";
+import { userHotelBookings } from "../actions/hotel";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("ryan@gmail.com");
@@ -18,16 +19,17 @@ const Login = ({ history }) => {
       let res = await login({ email, password });
       
       if (res.data) {
+        let bookings = await userHotelBookings(res.data.token);
         console.log(
-          "SAVE USER RES IN REDUX AND LOCAL STORAGE THEN REDIRECT ===> "
+          "SAVE USER RES IN REDUX AND LOCAL STORAGE THEN REDIRECT ===> ", bookings.data?.length
         );
         // console.log(res.data);
         // save user and token to local storage
-        window.localStorage.setItem("auth", JSON.stringify(res.data));
+        window.localStorage.setItem("auth", JSON.stringify({...res.data, ...{hotelCount: bookings.data?.length || 0}}));
         // save user and token to redux
         dispatch({
           type: "LOGGED_IN_USER",
-          payload: res.data,
+          payload: {...res.data, ...{hotelCount: bookings.data?.length || 0}},
         });
         history.push("/dashboard");
       }

@@ -19,6 +19,11 @@ import StripeSuccess from "./stripe/StripeSuccess";
 import StripeCancel from "./stripe/StripeCancel";
 import SearchResult from "./hotels/SearchResult";
 
+import PaymentContainer from "./booking/PaymentContainer";
+import CabContainer from "./components/cabs/CabContainer"
+
+
+
 /**
  * Lets create TopNavigation/menu bar so that we can easily TopNavigate between pages
  * lets write it in App.js before we move it to its own component
@@ -27,7 +32,7 @@ import SearchResult from "./hotels/SearchResult";
 function App() {
   return (
     <BrowserRouter>
-      <TopNav />
+      <TopNav />    
       <ToastContainer position="top-center" />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -54,6 +59,8 @@ function App() {
         />
         <PrivateRoute exact path="/stripe/cancel" component={StripeCancel} />
         <Route exact path="/search-result" component={SearchResult} />
+        <Route exact path="/payment/:hotelId" component={PaymentContainer} />
+        <Route exact path="/dashboard/cab" component={CabContainer} />
       </Switch>
     </BrowserRouter>
   );

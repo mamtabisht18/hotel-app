@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getSelectedHotel, HOTELS_MOCK } from "../mocks/hotel";
 import { searchHotels } from "../mocks/search-hotels";
+import { SELLERS_HOTELS_MOCK } from "../mocks/sellers.hotels";
 import { BOOKINGS_HOTELS_MOCK } from "../mocks/user-bookings";
 
 export const createHotel = async (token, data) =>
@@ -24,12 +25,27 @@ export const diffDays = (from, to) => {
   return difference;
 };
 
+
+export const getDiscountedPrice = (price) => {
+  const discountPercentage = 10;
+  let discountPrice = price;
+  if(price > 0) {
+    discountPrice = (price * (100 - discountPercentage))/100;
+  }
+
+  return discountPrice;
+};
+
 export const sellerHotels = async (token) =>
   await axios.get(`${process.env.REACT_APP_API}/seller-hotels`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+
+// export const sellerHotels = async (token) => {
+//   return SELLERS_HOTELS_MOCK
+// }
 
 export const deleteHotel = async (token, hotelId) =>
   await axios.delete(`${process.env.REACT_APP_API}/delete-hotel/${hotelId}`, {
@@ -84,3 +100,10 @@ export const searchListings = async (query) =>
 
 // export const searchListings = async (query) =>  searchHotels(query)
  
+
+export const bookHotel = async (token, hotelId, amount) =>
+  await axios.post(`${process.env.REACT_APP_API}/book-hotel`,{hotelId, amount}, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

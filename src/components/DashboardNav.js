@@ -21,6 +21,15 @@ const DashboardNav = () => {
           Your Hotels
         </Link>
       </li>
+
+      <li className="nav-item">
+        <Link
+          className={`nav-link ${active === "/dashboard/cab" && "active"}`}
+          to="/dashboard/cab"          
+        >
+          Book Cab
+        </Link>
+      </li>
     </ul>
   );
 };
