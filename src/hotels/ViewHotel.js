@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useStore } from "react-redux";
 import { read, diffDays, isAlreadyBooked, getDiscountedPrice } from "../actions/hotel";
-import { getSessionId } from "../actions/stripe";
+import { currencyFormatter, getSessionId } from "../actions/stripe";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
@@ -75,16 +75,29 @@ const ViewHotel = ({ match, history }) => {
 
 {auth.hotelCount ? (
        <>
-       <s>${hotel.price}</s> 
+       <s>{currencyFormatter({
+                    amount: hotel.price || 0,
+                    currency: "INR",
+                  })}</s> 
        &nbsp;              
-              <b>{getDiscountedPrice(hotel.price)}</b>
+              <b>
+              {currencyFormatter({
+                    amount: getDiscountedPrice(hotel.price) || 0,
+                    currency: "INR",
+                  })}
+                
+                
+                </b>
               &nbsp;
               <span className="discount-per">10 % off</span>
               
        </>
       ) : (
         <>
-        ${hotel.price}
+        {currencyFormatter({
+                    amount: hotel.price || 0,
+                    currency: "INR",
+                  })}
         </>
       )
       

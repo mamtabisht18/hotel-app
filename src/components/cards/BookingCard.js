@@ -34,8 +34,8 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
                 {hotel.title}{" "}
                 <span className="float-right text-primary">
                   {currencyFormatter({
-                    amount: hotel.price * 100,
-                    currency: "usd",
+                    amount: hotel.price,
+                    currency: "INR",
                   })}
                 </span>{" "}
               </h3>

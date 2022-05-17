@@ -10,6 +10,7 @@ import {
   import { useState } from "react";
   import { useSelector } from "react-redux";
 import { getDiscountedPrice } from "../actions/hotel";
+import { currencyFormatter } from "../actions/stripe";
 
 
 
@@ -48,16 +49,27 @@ import { getDiscountedPrice } from "../actions/hotel";
                
                {auth.hotelCount ? (
                  <>
-                 <s>${price}</s> 
+                 <s>{currencyFormatter({
+                    amount: price || 0,
+                    currency: "INR",
+                  })}</s> 
                  &nbsp;              
-                        <b>{getDiscountedPrice(price)}</b>
+                        <b>
+                        {currencyFormatter({
+                    amount: getDiscountedPrice(price) || 0,
+                    currency: "INR",
+                  })}
+                          </b>
                         &nbsp;
                         <span className="discount-per">10 % off</span>
                         
                  </>
                 ) : (
                   <>
-                  ${price}
+                  {currencyFormatter({
+                    amount: price || 0,
+                    currency: "INR",
+                  })}
                   </>
                 )                 
                 }
