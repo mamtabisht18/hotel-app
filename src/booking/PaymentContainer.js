@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
 
 import { allHotels, bookHotel, read } from "../actions/hotel";
 import SmallCard from "../components/cards/SmallCard";
@@ -14,6 +15,7 @@ const PaymentContainer = ({ match }) => {
     const [hotel, setHotel] = useState({});
 
     const { auth } = useSelector((state) => ({ ...state }));
+    const dispatch = useDispatch();
 
   useEffect(() => {
     loadSellerHotel();
@@ -29,7 +31,8 @@ const PaymentContainer = ({ match }) => {
     try {
       let res = await bookHotel(auth.token, hotel._id, hotel.price);
       console.log("ORDER CREATE RES", res);
-      toast.success("Hotel is booked");
+      toast.success("Hotel is booked", {...auth, ...{hotelCount: ((auth.hotelCount || 0) + 1)}});
+      window.localStorage.setItem("auth", JSON.stringify({...auth, ...{hotelCount: ((auth.hotelCount || 0) + 1)}}));
       setTimeout(() => {
         window.location.href = "/dashboard";
       }, 1000);
