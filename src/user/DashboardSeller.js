@@ -65,6 +65,7 @@ const DashboardSeller = () => {
             showViewMoreButton={false}
             owner={true}
             handleHotelDelete={handleHotelDelete}
+            showDiscount = {false}
           />
         ))}
       </div>

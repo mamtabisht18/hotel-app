@@ -26,11 +26,9 @@ const PaymentContainer = ({ match }) => {
     setHotel(res.data);
   };
 
-  const onBookHotel = async () =>{
-
+  const onBookHotel = async (priceToPaid) =>{
     try {
-      let res = await bookHotel(auth.token, hotel._id, hotel.price);
-      console.log("ORDER CREATE RES", res);
+      let res = await bookHotel(auth.token, hotel._id, priceToPaid);
       toast.success("Hotel is booked", {...auth, ...{hotelCount: ((auth.hotelCount || 0) + 1)}});
       window.localStorage.setItem("auth", JSON.stringify({...auth, ...{hotelCount: ((auth.hotelCount || 0) + 1)}}));
       setTimeout(() => {

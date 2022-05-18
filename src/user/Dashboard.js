@@ -5,14 +5,12 @@ import { userHotelBookings } from "../actions/hotel";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import BookingCard from "../components/cards/BookingCard";
-import { useDispatch } from "react-redux";
 
 const Dashboard = () => {
   const {
     auth: { token },
   } = useSelector((state) => ({ ...state }));
   const [booking, setBooking] = useState([]);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     loadUserBookings();
@@ -20,12 +18,7 @@ const Dashboard = () => {
 
   const loadUserBookings = async () => {
     const res = await userHotelBookings(token);
-    console.table(res.data?.length);
     setBooking(res.data);
-    // dispatch({
-    //   type: "USER_HOTELS_COUNT",
-    //   payload: {hotelCount: res.data?.length || 0},
-    // });
   };
 
   return (

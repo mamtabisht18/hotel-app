@@ -7,8 +7,8 @@ import { LOGIN_MOCK } from "../mocks/user";
 import { userHotelBookings } from "../actions/hotel";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("ryan@gmail.com");
-  const [password, setPassword] = useState("rrrrrr");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
 

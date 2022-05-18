@@ -1,45 +1,67 @@
 import { currencyFormatter } from "../../actions/stripe";
-import { diffDays } from "../../actions/hotel";
+import { diffDays, getDiscountedPrice } from "../../actions/hotel";
 import { useHistory, Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, RightOutlined  } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { Button } from "antd";
 
 const SmallCard = ({
   h,
   handleHotelDelete = (f) => f,
   owner = false,
   showViewMoreButton = true,
+  showDiscount = true, // for Seller it will be false
 }) => {
+  const { auth } = useSelector((state) => ({ ...state }));
+
   const history = useHistory();
   return (
     <>
       <div className="card mb-3 small-cards"  style={{width:'100%', background:'white'}}>
         <div className="row no-gutters">
-          <div className="col-md-4">
+          <div className="col-md-3">
             {h.image && h.image.contentType ? (
               <img
                 src={`${process.env.REACT_APP_API}/hotel/image/${h._id}`}
                 alt="default hotel image"
-                className="card-image img img-fluid hotel-image"
+                className="hotel-image"
               />
             ) : (
               <img
                 src="https://via.placeholder.com/900x500.png?text=MERN+Booking"
                 alt="default hotel image"
-                className="card-image img img-fluid hotel-image"
+                className="hotel-image"
               />
             )}
                 
           </div>
-          <div className="col-md-8">
+          <div className="col-md-6">
             <div className="card-body">
               <h3 className="card-title">
                 {h.title}{" "}
-                <span className="float-right text-primary">
+                {
+                  auth?.hotelCount && showDiscount ? (<>
+                  <s><span className="float-right text-primary">
                   {currencyFormatter({
                     amount: h.price,
                     currency: "INR",
                   })}
-                </span>{" "}
+                </span></s>
+                <b>&nbsp;
+                {currencyFormatter({
+                    amount: getDiscountedPrice(h.price) || 0,
+                    currency: "INR",
+                  })}
+                </b>
+                &nbsp;
+                  </>) : (<span className="float-right text-primary">
+                  {currencyFormatter({
+                    amount: h.price,
+                    currency: "INR",
+                  })}
+                </span>)
+                }
+                
               </h3>
               <p className="alert alert-info">{h.location}</p>
               <p className="card-text">{`${h.content.substring(0, 200)}...`}</p>
@@ -53,29 +75,34 @@ const SmallCard = ({
               <p className="card-text">
                 Available from {new Date(h.from).toLocaleDateString()}
               </p>
-
-              <div className="d-flex justify-content-between h4">
+            </div>
+          </div>
+          <div className="col-md-3 d-flex justify-content-center align-items-center">
+          <div className="w-100 d-flex justify-content-center align-items-center">
                 {showViewMoreButton && (
-                  <button
-                    onClick={() => history.push(`/hotel/${h._id}`)}
-                    className="btn btn-primary"
-                  >
-                    Show more
-                  </button>
+                  // <button
+                  //   onClick={() => history.push(`/hotel/${h._id}`)}
+                  //   className="btn btn-primary"
+                  // >
+                  //   Show more
+                  // </button>
+                          <Button type="primary"  onClick={() => history.push(`/hotel/${h._id}`)} >Show more <RightOutlined  /></Button>
                 )}
                 {owner && (
-                  <>
+                  <div>
                     <Link to={`/hotel/edit/${h._id}`}>
-                      <EditOutlined className="text-warning" />
+                      <EditOutlined className="text-warning"  style={{ fontSize: '30px' }}/>
                     </Link>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <DeleteOutlined
                       onClick={() => handleHotelDelete(h._id)}
                       className="text-danger"
+                      style={{ fontSize: '30px' }}
                     />
-                  </>
+                  </div>
                 )}
               </div>
-            </div>
+                
           </div>
         </div>
       </div>

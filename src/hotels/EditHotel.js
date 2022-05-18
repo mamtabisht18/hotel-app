@@ -74,7 +74,7 @@ const EditHotel = ({ match }) => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
+      <div className="container-fluid bg-secondary p-5 text-center nav-banner">
         <h2>Edit Hotel</h2>
       </div>
       <div className="container-fluid">
@@ -95,7 +95,6 @@ const EditHotel = ({ match }) => {
               alt="preview_image"
               className="img img-fluid m-2"
             />
-            <pre>{JSON.stringify(values, null, 4)}</pre>
           </div>
         </div>
       </div>

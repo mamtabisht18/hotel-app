@@ -1,4 +1,5 @@
 import { Modal } from "antd";
+import { currencyFormatter } from "../../actions/stripe";
 
 const OrderModal = ({ session, orderedBy, showModal, setShowModal }) => {
   return (
@@ -10,9 +11,10 @@ const OrderModal = ({ session, orderedBy, showModal, setShowModal }) => {
       <p>Payment intent: {session.payment_intent}</p>
       <p>Payment status: {session.payment_status}</p>
       <p>
-        Amount total: {session.currency.toUpperCase()}{" "}
-        {/* {session.amount_total / 100} */}
-        {session.amount_total}
+        Amount total: { currencyFormatter({
+                    amount: session.amount_total || 0,
+                    currency: session.currency.toUpperCase(),
+                  })}
       </p>
       {/* <p>Stripe customer id: {session.customer}</p> */}
       <p>Customer: {orderedBy.name}</p>

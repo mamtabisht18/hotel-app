@@ -20,6 +20,12 @@ import { currencyFormatter } from "../actions/stripe";
     const [numberValid, setNumberValid] = useState(true);
     const { auth } = useSelector((state) => ({ ...state }));
 
+    let priceToPaid =  price;
+
+    if(auth?.hotelCount) {
+      priceToPaid = getDiscountedPrice(price);
+    }
+
   
     function handleSubmit(e) {
       e.preventDefault();
@@ -33,7 +39,7 @@ import { currencyFormatter } from "../actions/stripe";
           }`
         );
       } else {
-        onBookHotel()
+        onBookHotel(priceToPaid)
       }
         
     }
@@ -47,7 +53,7 @@ import { currencyFormatter } from "../actions/stripe";
       <div className="row mt-5">
         <div className="text-center mb-5">
                
-               {auth.hotelCount ? (
+               {auth?.hotelCount ? (
                  <>
                  <s>{currencyFormatter({
                     amount: price || 0,
@@ -56,7 +62,7 @@ import { currencyFormatter } from "../actions/stripe";
                  &nbsp;              
                         <b>
                         {currencyFormatter({
-                    amount: getDiscountedPrice(price) || 0,
+                    amount: priceToPaid || 0,
                     currency: "INR",
                   })}
                           </b>
