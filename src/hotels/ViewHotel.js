@@ -73,7 +73,7 @@ const ViewHotel = ({ match, history }) => {
             <b>{hotel.content}</b>
             <p className="alert alert-info mt-3">
 
-{auth.hotelCount ? (
+{auth && auth.hotelCount ? (
        <>
        <s>{currencyFormatter({
                     amount: hotel.price || 0,
