@@ -28,7 +28,7 @@ const RegisterForm = ({
         </div>
         <div>
           <form className="form-signin" onSubmit={handleSubmit}>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Full Name</label>
             <input className="form-styling" type="text"
               placeholder="Enter name"
               value={name}

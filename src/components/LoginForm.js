@@ -45,11 +45,11 @@ const history = useHistory()
       </div>
       <div>
         <form className="form-signin" onSubmit={handleSubmit}>
-          <label htmlFor="username">Username</label>
-          <input className="form-styling" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label htmlFor="username">Email</label>
+          <input className="form-styling"  placeholder="Enter email" type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
 
           <label htmlFor="password">Password</label>
-          <input className="form-styling" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input className="form-styling"  placeholder="Enter password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
           <div className="btn-animate">
             <button className="btn-signin" disabled={!email || !password}>Sign in</button>

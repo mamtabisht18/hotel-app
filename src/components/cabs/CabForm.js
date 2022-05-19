@@ -14,9 +14,9 @@ const { Option } = Select;
 const DISTANCE_DISCOUNT = 25;
 
 const fairArr = [
-    {source: "Mansarovar", destionation: "Sodala", distance: 10, fairPerKm: 5 },
-    {source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 8},
-    {source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 5},
+    {source: "Mansarovar", destionation: "Sodala", distance: 10, fairPerKm: 10 },
+    {source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
+    {source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
 ]
 
 const CabForm = () => {
@@ -124,6 +124,7 @@ const calculateFair = () => {
   >
     <Option key={"Sodala"}>Sodala</Option>
     <Option key={"Vaishali"}>Vaishali</Option>
+    <Option key={"Bagru"}>Bagru</Option>
 \        </Select>
 </div>
 <div className="form-group col-md-2">
