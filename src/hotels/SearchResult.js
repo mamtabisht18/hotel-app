@@ -14,9 +14,8 @@ const SearchResult = () => {
   // when component mounts, get search params from url and use to send search query to backend
   useEffect(() => {
     const { location, date, bed } = queryString.parse(window.location.search);
-    // console.table({ location, date, bed });
     searchListings({ location, date, bed }).then((res) => {
-      console.log("SEARCH RESULTS ===>", res.data);
+      // console.log("SEARCH RESULTS ===>", res.data);
       setHotels(res.data);
     });
   }, [window.location.search]);
@@ -33,6 +32,9 @@ const SearchResult = () => {
             <SmallCard key={h._id} h={h} />
           ))}
         </div>
+        {
+          !hotels?.length && <div className="alert alert-danger m-5" role="alert">No Results found!!!</div>
+        }
       </div>
     </>
   );

@@ -144,7 +144,7 @@ const calculateFair = () => {
 <div className="form-group col-md-2">
   <TimePicker className="w-100  m-2 p-1" use12Hours format="h:mm a" onChange={onChange}  value={moment(time, format)}/>               
 </div>
-<div className="form-group col-md-2">&nbsp; &nbsp;
+<div className="form-group col-md-4">&nbsp; &nbsp;
 <button className="btn btn-outline-primary m-2" type="button" onClick={calculateFair}>Calculate Fair</button>
 <button className="btn btn-outline-primary m-2">Book</button>
  

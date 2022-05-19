@@ -52,7 +52,7 @@ const history = useHistory()
           <input className="form-styling"  placeholder="Enter password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
           <div className="btn-animate">
-            <button className="btn-signin" disabled={!email || !password}>Sign in</button>
+            <button className="btn-signin" disabled={!email || !password}>SIGN IN</button>
           </div>
         </form>
       </div>

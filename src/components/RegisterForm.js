@@ -49,7 +49,7 @@ const RegisterForm = ({
 
             <div className="btn-animate">
               <button disabled={!name || !email || !password} className="btn-signin">
-        Sign Up
+        SIGN UP
       </button>
             </div>
           </form>

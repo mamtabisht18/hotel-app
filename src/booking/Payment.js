@@ -51,8 +51,10 @@ import { currencyFormatter } from "../actions/stripe";
   
     return (
       <div className="row mt-5">
-        <div className="text-center mb-5">
-               
+        <div className="alert alert-success text-center mb-5">    
+
+               Your Bill amount is &nbsp;
+               <b>
                {auth?.hotelCount ? (
                  <>
                  <s>{currencyFormatter({
@@ -79,6 +81,7 @@ import { currencyFormatter } from "../actions/stripe";
                   </>
                 )                 
                 }
+                </b>
              </div>
         <div className="col-md-4">
         <Card fixClass="fix-new" cardClass="card-new" />
