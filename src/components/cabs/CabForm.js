@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import {  Select,TimePicker } from "antd";
+import {  DatePicker, Select,TimePicker } from "antd";
 import { useSelector } from "react-redux";
 import moment from 'moment';
 import { currencyFormatter } from "../../actions/stripe";
 import { bookCab } from "../../actions/cab";
 
+import  './cabForm.css'
+
 const format = 'h:mm a';
 const { Option } = Select;
+
+const DISTANCE_DISCOUNT = 25;
 
 const fairArr = [
     {source: "Mansarovar", destionation: "Sodala", distance: 10, fairPerKm: 5 },
@@ -25,29 +29,27 @@ const CabForm = () => {
     destination: "",
     distance: 0,
     fair: 0,
-    time: moment().format(format)
+    time: moment().format(format),
+    departureDate: "",
   });
   const [message, setMessage] = useState('')
   
   // destructuring variables from state
-  const { source, destination, distance, fair,time } = values;
+  const { source, destination, distance, fair,time,departureDate } = values;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(source, destination, distance, fair)
-    // console.log(values);
-    // console.log(location);
-
+    
     let formData = new FormData();
     formData.append("source", source);
     formData.append("destination", destination);
     formData.append("distance", distance);
     formData.append("fair", fair);
-    
+    formData.append("time", time);
+    formData.append("departureDate", departureDate);
 
     try {
       let res = await bookCab(token, formData);
-      console.log("CAB CREATE RES", res);
       toast.success("Cab is booked");
       setTimeout(() => {
         window.location.reload();
@@ -64,67 +66,93 @@ const CabForm = () => {
         return;
       }
     setValues({ ...values, time: timeString });
+    setMessage("");
   }
 
   const handleLocationChange = (location, field) => {
         setValues((values)=>{
-            const updatedValues = { ...values, [field]: location }
-
-            if(updatedValues.destination && updatedValues.source) {
-
-                const result = fairArr.find(row => row.destionation === updatedValues.destination && row.source === updatedValues.source)
-                if(result){
-                    updatedValues.fair  = result.distance * result.fairPerKm;
-                    updatedValues.distance  = result.distance;
-                    setMessage(`Your fair is ${currencyFormatter({
-                        amount: updatedValues.fair,
-                        currency: "INR",
-                      })}`)
-                }
-
-            }
-            return updatedValues
+            return { ...values, [field]: location }
         });
+        setMessage("")
         
 };
 
+const calculateFair = () => {
+   if(values.destination && values.source) {
+                const result = fairArr.find(row => row.destionation === values.destination && row.source === values.source)
+                if(result){
+                    const fair  = DISTANCE_DISCOUNT > result.distance  ? 0 : (result.distance -DISTANCE_DISCOUNT) * result.fairPerKm;
+                    const distance  = result.distance;
+                    let message = `Your fair is ${currencyFormatter({
+                      amount: fair,
+                      currency: "INR",
+                    })}`
+                   
+                    
+                    setMessage(message)
+
+                      setValues({ ...values, fair, distance })
+                }
+
+            }
+}
+
   return (
     <>
-    {JSON.stringify(values)}
-    <div style={{color: 'green', fontWeight: 'bold'}} className="text-center">
-    {message}
-    </div>
-      <div className="container-fluid bg-secondary p-5 nav-banner text-center">
+      {/* <div className="container-fluid bg-secondary p-5 nav-banner text-center">
         <h2>Book Cab</h2>
-      </div>
+      </div> */}
       <form onSubmit={handleSubmit}>
-      <div className="form-group">
+      <div className="form-row d-flex m-5 align-items-center">
+      <div className="form-group col-md-2">
 
-      <Select
-          onChange = {(value) => {handleLocationChange(value, 'source')}}
-          className="w-100 m-1"
-          size="large"
-          placeholder="Source"
-        >
-          <Option key={"Mansarovar"}>Mansarovar</Option>
-          <Option key={"Sodala"}>Sodala</Option>
-        </Select>
-
-        <Select
-          onChange = {(value) => {handleLocationChange(value, 'destination')}}
-          className="w-100 m-1"
-          size="large"
-          placeholder="Destination"
-        >
-          <Option key={"Sodala"}>Sodala</Option>
-          <Option key={"Vaishali"}>Vaishali</Option>
+<Select
+    className="w-100 m-2 p-1 cab-form"
+    onChange = {(value) => {handleLocationChange(value, 'source')}}
+    size="large"
+    placeholder="Source"
+  >
+    <Option key={"Mansarovar"}>Mansarovar</Option>
+    <Option key={"Sodala"}>Sodala</Option>
+  </Select>
+  </div>
+  <div className="form-group col-md-2">
+  <Select
+    className="w-100 m-2 p-1 cab-form"
+    onChange = {(value) => {handleLocationChange(value, 'destination')}}
+    placeholder="Destination"
+  >
+    <Option key={"Sodala"}>Sodala</Option>
+    <Option key={"Vaishali"}>Vaishali</Option>
 \        </Select>
-
-        <TimePicker className="w-100 m-2" use12Hours format="h:mm a" onChange={onChange}  value={moment(time, format)}/>               
-
-        </div>
-      <button className="btn btn-outline-primary m-2">Book</button>
+</div>
+<div className="form-group col-md-2">
+<DatePicker
+  placeholder="Departure Date"
+  className="form-control w-100  m-2 p-1"
+  onChange={(date, dateString) => {
+    setValues({ ...values, departureDate: dateString })
+    setMessage("");
+  }
+  }
+  disabledDate={(current) =>
+    current && current.valueOf() < moment().subtract(1, "days")
+  }
+/>
+</div>
+<div className="form-group col-md-2">
+  <TimePicker className="w-100  m-2 p-1" use12Hours format="h:mm a" onChange={onChange}  value={moment(time, format)}/>               
+</div>
+<div className="form-group col-md-2">&nbsp; &nbsp;
+<button className="btn btn-outline-primary m-2" type="button" onClick={calculateFair}>Calculate Fair</button>
+<button className="btn btn-outline-primary m-2">Book</button>
+ 
+</div>
+  </div>
     </form>
+    {message && <div className="alert alert-primary" role="alert">
+    {message}
+    </div>}
     </>
   );
 };

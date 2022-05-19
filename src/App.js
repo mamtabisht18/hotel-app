@@ -60,7 +60,7 @@ function App() {
         <PrivateRoute exact path="/stripe/cancel" component={StripeCancel} />
         <Route exact path="/search-result" component={SearchResult} />
         <Route exact path="/payment/:hotelId" component={PaymentContainer} />
-        <Route exact path="/dashboard/cabs" component={CabContainer} />
+        <Route exact path="/cabs" component={CabContainer} />
       </Switch>
     </BrowserRouter>
   );

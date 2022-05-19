@@ -105,3 +105,18 @@
   background-color: #cce4f5;
   cursor: pointer;
 }
+
+.nav-link {
+  color: black;
+}
+
+.nav .active {
+  color: #1890ff;
+  font-weight: bold;
+  /* border-bottom: 4px solid #1890ff; */
+}
+
+.nav-link:hover {
+  color: #1890ff;
+  font-weight: bold;
+}

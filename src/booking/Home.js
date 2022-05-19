@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { allHotels, userHotelBookings } from "../actions/hotel";
 import SmallCard from "../components/cards/SmallCard";
 import Search from "../components/forms/Search";
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
+  const { auth } = useSelector((state) => ({ ...state }));
+  
 
   useEffect(() => {
     loadAllhotels();
@@ -26,9 +30,8 @@ const Home = () => {
       </div>
       <div className="container-fluid">
         <br />
-        {/* <pre>{JSON.stringify(hotels, null, 4)}</pre> */}
         {hotels.map((h) => (
-          <SmallCard key={h._id} h={h} />
+          <SmallCard key={h._id} h={h}  showViewMoreButton={!(h.postedBy._id === auth?.user._id)} owner={h.postedBy._id === auth?.user._id}/>
         ))}
       </div>
     </>

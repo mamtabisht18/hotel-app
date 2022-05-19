@@ -10,14 +10,14 @@ const CabContainer = () => {
   const notConnected = () => (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-md-10">
           {/* <div className="p-5 pointer"> */}
           {/* <div className="col-md-6 offset-md-3"> */}
            
             <CabForm/>
           {/* </div> */}
         </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
         <CabsList/>
         </div>
       </div>
@@ -30,10 +30,7 @@ const CabContainer = () => {
     <div className="container-fluid bg-secondary p-5 nav-banner">
         <ConnectNav />
       </div>
-
-      <div className="container-fluid p-4">
-        <DashboardNav />
-      </div>
+      
          {notConnected()}
 
     </>

@@ -63,12 +63,12 @@ const ViewHotel = ({ match, history }) => {
       </div>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-4">
             <br />
             <img src={image} alt={hotel.title} className="img img-fluid m-2 hotel-image" />
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-7">
             <br />
             <b>{hotel.content}</b>
             <p className="alert alert-info mt-3">

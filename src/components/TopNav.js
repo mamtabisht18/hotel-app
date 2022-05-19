@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link , NavLink} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -6,6 +6,7 @@ const TopNav = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => ({ ...state }));
   const history = useHistory();
+  const active = window.location.pathname;
 
   const logout = () => {
     dispatch({
@@ -18,32 +19,45 @@ const TopNav = () => {
 
   return (
     <div className="nav bg-light d-flex justify-content-between">
-      <Link className="nav-link" to="/">
-        Home
-      </Link>      
+      <div className="d-flex justify-content-between">
+      <NavLink exact={true} activeClassName='active' className="nav-link" to="/">
+      <i className="fa fa-fw fa-home"/> Home
+      </NavLink> 
 
       {auth !== null && (
-        <Link className="nav-link" to="/dashboard">
-          Dashboard
-        </Link>
+        <NavLink className="nav-link" to="/dashboard">          
+          <i className="fa fa-dashboard"></i> Dashboard
+        </NavLink>
       )}
 
-      {auth !== null && (
-        <a className="nav-link pointer" href="#" onClick={logout}>
-          Logout
-        </a>
+    {auth !== null && (
+        <NavLink className="nav-link" to="/cabs">
+          <i className="fa fa-cab"></i> Cabs
+        </NavLink>
       )}
+      </div>
+     
+    <div className="d-flex justify-content-between">
 
-      {auth === null && (
+    {auth === null && (
         <>
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-          <Link className="nav-link" to="/register">
-            Register
-          </Link>
+          <NavLink className="nav-link" to="/login">
+          <i className="fa fa-fw fa-user"></i>Login
+          </NavLink>
+          <NavLink className="nav-link" to="/register">
+          <i className="fa fa-user-plus"></i> Register
+          </NavLink>
         </>
       )}
+    {auth !== null && (      
+        <a className="nav-link pointer" href="#" onClick={logout}>
+          <i className="fa fa-sign-out"></i> Logout
+        </a>
+      )}
+    </div>
+     
+
+      
     </div>
   );
 };

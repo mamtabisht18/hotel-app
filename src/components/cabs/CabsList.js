@@ -1,88 +1,62 @@
-import { Table, Tag, Space } from 'antd';
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import moment from 'moment';
+
+import { Table, Tag } from 'antd';
+import { allBookedCabs } from '../../actions/cab';
 
 const columns = [
   {
     title: 'Source',
     dataIndex: 'source',
-    key: 'name',
-    render: text => <a>{text}</a>,
-  },
-  // {
-  //   title: 'De',
-  //   dataIndex: 'age',
-  //   key: 'age',
-  // },
+  }, 
   {
     title: 'Destination',
     dataIndex: 'destination',
-    key: 'address',
   },
 
   {
     title: 'Distance',
     dataIndex: 'distance',
-    key: 'distance',
   },
 
   {
     title: 'Fair',
     dataIndex: 'fair',
-    key: 'fair',
+    render: (fair) => (      
+      <Tag color={fair ?  'green' : 'blue'}>
+        {fair || 'Free'}
+      </Tag>
+     ),
   },
   {
     title: 'Time',
     dataIndex: 'time',
-    key: 'time',
-  },
-  // {
-  //   title: 'Tags',
-  //   key: 'tags',
-  //   dataIndex: 'tags',
-  //   render: tags => (
-  //     <>
-  //       {tags.map(tag => {
-  //         let color = tag.length > 5 ? 'geekblue' : 'green';
-  //         if (tag === 'loser') {
-  //           color = 'volcano';
-  //         }
-  //         return (
-  //           <Tag color={color} key={tag}>
-  //             {tag.toUpperCase()}
-  //           </Tag>
-  //         );
-  //       })}
-  //     </>
-  //   ),
-  // },
-];
-
-const data = [
+  },  
   {
-    key: '1',
-    source: 'John Brown',
-    distance: 32,
-    fair: 100,
-    destination: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    source: 'John Brown',
-    distance: 32,
-    fair: 100,
-    destination: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    source: 'John Brown',
-    distance: 32,
-    fair: 100,
-    destination: 'New York No. 1 Lake Park',
-  },
+    title: 'Departure Date',
+    dataIndex: 'departureDate',
+    render: (departureDate) => moment(departureDate).format("DD-MM-YYYY")
+  },  
+  
 ];
 
 
 const CabsList = () =>{
-  return <Table columns={columns} dataSource={data} />
+  const { auth } = useSelector((state) => ({ ...state }));
+  const [cabs, setCabs] = useState([]);
+
+  useEffect(() => {
+    loadAllBookedCabs();
+  }, []);
+
+  const loadAllBookedCabs = async () => {
+    let res = await allBookedCabs(auth?.token);
+    setCabs(res.data);
+  };  
+
+
+  return <Table columns={columns} dataSource={cabs} pagination={false} rowKey='_id' />
 }
 
 export default CabsList;

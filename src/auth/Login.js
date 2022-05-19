@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { LOGIN_MOCK } from "../mocks/user";
 import { userHotelBookings } from "../actions/hotel";
 
+import "./Login.css"
+
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +19,7 @@ const Login = ({ history }) => {
     console.log("SEND LOGIN DATA", { email, password });
     try {
       let res = await login({ email, password });
-      
+
       if (res.data) {
         let bookings = await userHotelBookings(res.data.token);
         console.log(
@@ -25,11 +27,11 @@ const Login = ({ history }) => {
         );
         // console.log(res.data);
         // save user and token to local storage
-        window.localStorage.setItem("auth", JSON.stringify({...res.data, ...{hotelCount: bookings.data?.length || 0}}));
+        window.localStorage.setItem("auth", JSON.stringify({ ...res.data, ...{ hotelCount: bookings.data?.length || 0 } }));
         // save user and token to redux
         dispatch({
           type: "LOGGED_IN_USER",
-          payload: {...res.data, ...{hotelCount: bookings.data?.length || 0}},
+          payload: { ...res.data, ...{ hotelCount: bookings.data?.length || 0 } },
         });
         history.push("/dashboard");
       }
@@ -41,11 +43,7 @@ const Login = ({ history }) => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center">
-        <h1>Login</h1>
-      </div>
-
-      <div className="container">
+      <div className="container p-5 login-form">
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <LoginForm
@@ -58,6 +56,26 @@ const Login = ({ history }) => {
           </div>
         </div>
       </div>
+
+      {/* <div className="container">
+        <div className="frame">
+          <div className="nav">
+            <ul className="links">
+              <li className="signin-active"><a className="btn">Sign in</a></li>
+              <li className="signup-inactive"><a className="btn">Sign up </a></li>
+            </ul>
+          </div>
+          <div>
+            <form className="form-signin" action="" method="post" name="form"> <label for="username">Username</label> <input className="form-styling" type="text" name="username" placeholder="" /> <label for="password">Password</label> <input className="form-styling" type="text" name="password" placeholder="" /> <input type="checkbox" id="checkbox" /> <label for="checkbox"><span className="ui"></span>Keep me signed in</label>
+              <div className="btn-animate"> <a className="btn-signin">Sign in</a> </div>
+            </form>
+            <form className="form-signup" action="" method="post" name="form"> <label for="fullname">Full name</label> <input className="form-styling" type="text" name="fullname" placeholder="" /> <label for="email">Email</label> <input className="form-styling" type="text" name="email" placeholder="" /> <label for="password">Password</label> <input className="form-styling" type="text" name="password" placeholder="" /> <label for="confirmpassword">Confirm password</label> <input className="form-styling" type="text" name="confirmpassword" placeholder="" /> <a ng-click="checked = !checked" className="btn-signup">Sign Up</a> </form>
+
+          </div>
+          <div>
+          </div>
+        </div>
+      </div> */}
     </>
   );
 };

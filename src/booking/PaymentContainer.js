@@ -10,7 +10,7 @@ import { HunelProvider, HunelCreditCard } from "reactjs-credit-card";
 import Payment from "./Payment";
 import { useSelector } from "react-redux";
 
-const PaymentContainer = ({ match }) => {
+const PaymentContainer = ({ match, type="hotelBooking" }) => {
     const hunel = new HunelCreditCard();
     const [hotel, setHotel] = useState({});
 
