@@ -14,9 +14,12 @@ const { Option } = Select;
 const DISTANCE_DISCOUNT = 25;
 
 const fairArr = [
-    {source: "Mansarovar", destionation: "Sodala", distance: 10, fairPerKm: 10 },
+    {source: "Mansarovar", destionation: "Mahesh Nagar", distance: 10, fairPerKm: 10 },
     {source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
+    {source: "Mansarovar", destionation: "Bagru", distance: 50, fairPerKm: 10},
     {source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
+    {source: "Sodala", destionation: "Vaishali", distance: 100, fairPerKm: 10},
+    {source: "Sodala", destionation: "Mahesh Nagar", distance: 20, fairPerKm: 10},
 ]
 
 const CabForm = () => {
@@ -80,17 +83,22 @@ const CabForm = () => {
 const calculateFair = () => {
    if(values.destination && values.source) {
                 const result = fairArr.find(row => row.destionation === values.destination && row.source === values.source)
+                // console.log(result)
                 if(result){
                     const fair  = DISTANCE_DISCOUNT > result.distance  ? 0 : (result.distance -DISTANCE_DISCOUNT) * result.fairPerKm;
                     const distance  = result.distance;
-                    let message = `Your fair is ${currencyFormatter({
+                    let message = `Your total fair is ${currencyFormatter({
                       amount: fair,
                       currency: "INR",
                     })}`
-                   
-                    
-                    setMessage(message)
 
+                    message += `&nbsp; Rate per KM - ${result.fairPerKm} Rupees`
+                    message += `&nbsp; Distance is - ${distance} KM`
+
+                    if(!fair) {
+                      message += `&nbsp; You got discount for 25KM`
+                    }
+                      setMessage(message)
                       setValues({ ...values, fair, distance })
                 }
 
@@ -122,7 +130,7 @@ const calculateFair = () => {
     onChange = {(value) => {handleLocationChange(value, 'destination')}}
     placeholder="Destination"
   >
-    <Option key={"Sodala"}>Sodala</Option>
+    <Option key={"Mahesh Nagar"}>Mahesh Nagar</Option>
     <Option key={"Vaishali"}>Vaishali</Option>
     <Option key={"Bagru"}>Bagru</Option>
 \        </Select>
@@ -151,8 +159,7 @@ const calculateFair = () => {
 </div>
   </div>
     </form>
-    {message && <div className="alert alert-primary" role="alert">
-    {message}
+    {message && <div className="alert alert-primary" role="alert" dangerouslySetInnerHTML={{__html: message}}>
     </div>}
     </>
   );
