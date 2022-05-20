@@ -32,8 +32,8 @@ const Home = () => {
 
   return (
     <>
-      <div className="container-fluid bg-secondary p-5 text-center banner">
-        <h1>All Hotels</h1>
+      <div className="container-fluid p-5 text-center banner">
+        <h1>A Multipurpose Online Hotel Reservation System with Different Functionalities</h1>
       </div>
       <div className="col">
         <br />

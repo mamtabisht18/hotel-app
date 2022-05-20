@@ -11,7 +11,7 @@ const DashboardNav = () => {
           to="/dashboard"
           activeClassName='active'
         >
-          <i class="fa fa-money"/> &nbsp;Your Bookings
+          <i className="fa fa-money"/> &nbsp;Your Bookings
         </NavLink>
       </li>
       <li className="nav-item">
