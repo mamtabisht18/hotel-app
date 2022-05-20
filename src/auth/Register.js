@@ -31,7 +31,7 @@ const Register = ({ history }) => {
       
 
       <div className="container p-5 login-form">
-        <div className="row">
+        <div className="row p-5">
           <div className="col-md-6 offset-md-3">
             <RegisterForm
               handleSubmit={handleSubmit}

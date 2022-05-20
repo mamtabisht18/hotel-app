@@ -1,25 +1,28 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const DashboardNav = () => {
-  const active = window.location.pathname;
   //   console.log(active);
   return (
     <ul className="nav nav-tabs">
       <li className="nav-item">
-        <Link
-          className={`nav-link ${active === "/dashboard" && "active"}`}
+        <NavLink
+          exact={true}
+          className={`nav-link`}
           to="/dashboard"
+          activeClassName='active'
         >
-          Your Bookings
-        </Link>
+          <i class="fa fa-money"/> &nbsp;Your Bookings
+        </NavLink>
       </li>
       <li className="nav-item">
-        <Link
-          className={`nav-link ${active === "/dashboard/seller" && "active"}`}
+        <NavLink
+          exact={true}
+          className={`nav-link`}
+          activeClassName='active'
           to="/dashboard/seller"
         >
-          Your Hotels
-        </Link>
+          <i className="fa fa-hotel"/> &nbsp;Your Hotels
+        </NavLink>
       </li>
     </ul>
   );
