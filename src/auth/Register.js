@@ -4,6 +4,9 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { register } from "../actions/auth";
 
+import loginWallper from '../assets/login-backg.jpg'
+
+
 const Register = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,9 +33,11 @@ const Register = ({ history }) => {
     <>
       
 
-      <div className="container p-5 login-form">
-        <div className="row p-5">
-          <div className="col-md-6 offset-md-3">
+      <div className="login-form">
+      <img src={loginWallper} />
+
+        <div className="">
+          <div className="p-5">
             <RegisterForm
               handleSubmit={handleSubmit}
               name={name}

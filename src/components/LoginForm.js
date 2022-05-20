@@ -37,10 +37,16 @@ const history = useHistory()
     </button> */}
 
     <div className="frame">
+      <div  style={{backgroundColor: "#000",
+  opacity: .6, position: 'absolute',
+  width: '100%',
+  height: '100%', zIndex: -1}}>
+
+      </div>
       <div className="nav">
         <ul className="links">
-          <li><NavLink activeClassName='signin-active' className="btn" to="/login">Sign in</NavLink></li>
-          <li><NavLink className="btn signin-inactive" to="/register">Sign up </NavLink></li>
+          <li><NavLink activeClassName='signin-active'  to="/login">Sign in</NavLink></li>
+          <li><NavLink className="signin-inactive" to="/register">Sign up </NavLink></li>
         </ul>
       </div>
       <div>

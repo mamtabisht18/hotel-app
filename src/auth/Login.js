@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { LOGIN_MOCK } from "../mocks/user";
 import { userHotelBookings } from "../actions/hotel";
 
+import loginWallper from '../assets/login-backg.jpg'
+
 import "./Login.css"
 
 const Login = ({ history }) => {
@@ -43,9 +45,10 @@ const Login = ({ history }) => {
 
   return (
     <>
-      <div className="container p-5 login-form">
-        <div className="row p-5">
-          <div className="col-md-6 offset-md-3">
+      <div className="login-form">
+        <img src={loginWallper} />
+        <div className="">
+          <div className="p-5">
             <LoginForm
               handleSubmit={handleSubmit}
               email={email}

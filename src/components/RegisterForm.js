@@ -20,10 +20,16 @@ const RegisterForm = ({
   }
   return (
       <div className="frame">
+         <div  style={{backgroundColor: "#000",
+  opacity: .6, position: 'absolute',
+  width: '100%',
+  height: '100%', zIndex: -1}}>
+
+      </div>
         <div className="nav">
           <ul className="links">
-          <li><NavLink className="btn signin-inactive" to="/login">Sign in</NavLink></li>
-          <li><NavLink  activeClassName='btn signin-active' to="/register">Sign up </NavLink></li>
+          <li><NavLink className="signin-inactive" to="/login">Sign in</NavLink></li>
+          <li><NavLink  activeClassName='signin-active' to="/register">Sign up </NavLink></li>
           </ul>
         </div>
         <div>
