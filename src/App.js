@@ -21,6 +21,7 @@ import SearchResult from "./hotels/SearchResult";
 
 import PaymentContainer from "./booking/PaymentContainer";
 import CabContainer from "./components/cabs/CabContainer"
+import CabPayment from "./components/cabs/CabPayment";
 
 
 
@@ -59,8 +60,9 @@ function App() {
         />
         <PrivateRoute exact path="/stripe/cancel" component={StripeCancel} />
         <Route exact path="/search-result" component={SearchResult} />
-        <Route exact path="/payment/:hotelId" component={PaymentContainer} />
-        <Route exact path="/cabs" component={CabContainer} />
+        <PrivateRoute exact path="/payment/:hotelId" component={PaymentContainer} />
+        <PrivateRoute exact path="/cabs" component={CabContainer} />
+        <PrivateRoute exact path="/cabs/payment/:id" component={CabPayment} />
       </Switch>
     </BrowserRouter>
   );

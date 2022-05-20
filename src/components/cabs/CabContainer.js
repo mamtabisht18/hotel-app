@@ -11,11 +11,8 @@ const CabContainer = () => {
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-10">
-          {/* <div className="p-5 pointer"> */}
-          {/* <div className="col-md-6 offset-md-3"> */}
            
             <CabForm/>
-          {/* </div> */}
         </div>
         <div className="col-md-12">
         <CabsList/>

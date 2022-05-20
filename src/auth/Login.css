@@ -324,7 +324,7 @@ textarea:focus {
 	border: none;
 	border-radius: 20px;
 	margin-top: 23px;
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 }
 
 .btn-signin {
@@ -334,7 +334,7 @@ textarea:focus {
 	border: none;
 	border-radius: 20px;
 	margin-top: -8px;
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 }
 
 .btn-animate {
@@ -350,7 +350,7 @@ textarea:focus {
 	border: none;
 	border-radius: 20px;
 	margin-top: 23px;
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 	left: 0px;
 	top: 0px;
 	transition: all 0.5s ease, top 0.5s ease 0.5s, height 0.5s ease 0.5s,
@@ -364,13 +364,13 @@ textarea:focus {
 	left: -55px;
 	top: -420px;
 	color: rgba(255, 255, 255, 0);
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 }
 
 .btn-signup:hover,
 .btn-signin:hover {
 	cursor: pointer;
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 	transition: background-color 0.5s;
 }
 
@@ -489,7 +489,7 @@ h1 {
 
 a.btn-goback:hover {
 	cursor: pointer;
-	background-color: #1059ff;
+	background-color: rgb(0, 124, 194);
 	transition: all 0.5s;
 	color: #ffffff;
 }

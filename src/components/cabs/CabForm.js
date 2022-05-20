@@ -7,6 +7,7 @@ import { currencyFormatter } from "../../actions/stripe";
 import { bookCab } from "../../actions/cab";
 
 import  './cabForm.css'
+import { useHistory } from "react-router-dom";
 
 const format = 'h:mm a';
 const { Option } = Select;
@@ -14,18 +15,19 @@ const { Option } = Select;
 const DISTANCE_DISCOUNT = 25;
 
 const fairArr = [
-    {source: "Mansarovar", destionation: "Mahesh Nagar", distance: 10, fairPerKm: 10 },
-    {source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
-    {source: "Mansarovar", destionation: "Bagru", distance: 50, fairPerKm: 10},
-    {source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
-    {source: "Sodala", destionation: "Vaishali", distance: 100, fairPerKm: 10},
-    {source: "Sodala", destionation: "Mahesh Nagar", distance: 20, fairPerKm: 10},
+    {id: 1,source: "Mansarovar", destionation: "Mahesh Nagar", distance: 10, fairPerKm: 10 },
+    {id: 2,source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
+    {id: 3,source: "Mansarovar", destionation: "Bagru", distance: 50, fairPerKm: 10},
+    {id: 4,source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
+    {id: 5,source: "Sodala", destionation: "Vaishali", distance: 100, fairPerKm: 10},
+    {id: 6,source: "Sodala", destionation: "Mahesh Nagar", distance: 20, fairPerKm: 10},
 ]
 
 const CabForm = () => {
+  const history = useHistory()
   // redux
   const { auth } = useSelector((state) => ({ ...state }));
-  const { token } = auth;
+  // const { token } = auth;
   // state
   const [values, setValues] = useState({
     source: "",
@@ -42,7 +44,16 @@ const CabForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!auth || !auth?.token) {
+      history.push("/login");
+      return;
+    }
     
+    
+   
+    window.sessionStorage.setItem("cabDetails", JSON.stringify(values));    history.push(`/cabs/payment/1`);
+    return;
+
     let formData = new FormData();
     formData.append("source", source);
     formData.append("destination", destination);
@@ -51,16 +62,16 @@ const CabForm = () => {
     formData.append("time", time);
     formData.append("departureDate", departureDate);
 
-    try {
-      let res = await bookCab(token, formData);
-      toast.success("Cab is booked");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response.data);
-    }
+    // try {
+    //   let res = await bookCab(token, formData);
+    //   toast.success("Cab is booked");
+    //   setTimeout(() => {
+    //     window.location.reload();
+    //   }, 1000);
+    // } catch (err) {
+    //   console.log(err);
+    //   toast.error(err.response.data);
+    // }
   };
 
 
@@ -107,9 +118,6 @@ const calculateFair = () => {
 
   return (
     <>
-      {/* <div className="container-fluid bg-secondary p-5 nav-banner text-center">
-        <h2>Book Cab</h2>
-      </div> */}
       <form onSubmit={handleSubmit}>
       <div className="form-row d-flex m-5 align-items-center">
       <div className="form-group col-md-2">
