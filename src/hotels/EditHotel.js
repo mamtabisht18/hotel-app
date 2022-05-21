@@ -20,13 +20,14 @@ const EditHotel = ({ match }) => {
     from: "",
     to: "",
     bed: "",
+    amenities:""
   });
   const [image, setImage] = useState("");
   const [preview, setPreview] = useState(
     "https://via.placeholder.com/100x100.png?text=PREVIEW"
   );
   // destructuring variables from state
-  const { title, content, price, from, to, bed, location } = values;
+  const { title, content, price, from, to, bed, location,amenities } = values;
 
   useEffect(() => {
     loadSellerHotel();
@@ -51,6 +52,7 @@ const EditHotel = ({ match }) => {
     hotelData.append("from", from);
     hotelData.append("to", to);
     hotelData.append("bed", bed);
+    hotelData.append("amenities",amenities)
 
     try {
       let res = await updateHotel(token, hotelData, match.params.hotelId);

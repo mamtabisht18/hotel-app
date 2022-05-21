@@ -1,6 +1,7 @@
 import AlgoliaPlaces from "algolia-places-react";
-import { DatePicker, Select } from "antd";
+import { Checkbox, DatePicker, Select } from "antd";
 import moment from "moment";
+import { AMENITIES, BEDS, DEFAULT_SELECTED_AMENITIES } from "../../constants";
 
 const { Option } = Select;
 
@@ -21,6 +22,12 @@ const HotelCreateForm = ({
   setLocation,
 }) => {
   const { title, content, price } = values;
+
+  function onChange(checkedValues) {
+    if(checkedValues.length) {
+      setValues({ ...values, amenities: checkedValues.toString()})
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -76,11 +83,11 @@ const HotelCreateForm = ({
           className="w-100 m-2"
           size="large"
           placeholder="Number of beds"
-        >
-          <Option key={1}>{1}</Option>
-          <Option key={2}>{2}</Option>
-          <Option key={3}>{3}</Option>
-          <Option key={4}>{4}</Option>
+        > 
+
+          {BEDS.map((bed) => (
+            <Option key={bed}>{bed}</Option>
+          ))}
         </Select>
       </div>
 
@@ -106,7 +113,9 @@ const HotelCreateForm = ({
         }
       />
 
-      <button className="btn btn-outline-primary m-2">Save</button>
+    <Checkbox.Group options={AMENITIES} defaultValue={DEFAULT_SELECTED_AMENITIES} onChange={onChange} />
+
+      <button className="btn btn-outline-primary m-2">Add</button>
     </form>
   );
 };

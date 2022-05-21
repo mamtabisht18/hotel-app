@@ -20,13 +20,14 @@ const NewHotel = () => {
     from: "",
     to: "",
     bed: "",
+    amenities: ""
   });
   const [preview, setPreview] = useState(
     "https://via.placeholder.com/100x100.png?text=PREVIEW"
   );
   const [location, setLocation] = useState("");
   // destructuring variables from state
-  const { title, content, image, price, from, to, bed } = values;
+  const { title, content, image, price, from, to, bed,amenities } = values;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +43,7 @@ const NewHotel = () => {
     hotelData.append("from", from);
     hotelData.append("to", to);
     hotelData.append("bed", bed);
+    hotelData.append("amenities",amenities)
 
     console.log([...hotelData]);
 

@@ -4,6 +4,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import AlgoliaPlaces from "algolia-places-react";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import { BEDS } from "../../constants";
 
 // destructure values from ant components
 const { RangePicker } = DatePicker;
@@ -55,10 +56,10 @@ const Search = () => {
         placeholder="Number of beds"
       >
         <Option key={''}>---Select---</Option>
-        <Option key={1}>{1}</Option>
-        <Option key={2}>{2}</Option>
-        <Option key={3}>{3}</Option>
-        <Option key={4}>{4}</Option>
+        {BEDS.map((bed) => (
+            <Option key={bed}>{bed}</Option>
+          ))}
+      
       </Select>
 
       <SearchOutlined

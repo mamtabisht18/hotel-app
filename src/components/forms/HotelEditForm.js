@@ -1,6 +1,7 @@
 import AlgoliaPlaces from "algolia-places-react";
-import { DatePicker, Select } from "antd";
+import { Checkbox, DatePicker, Select } from "antd";
 import moment from "moment";
+import { AMENITIES, BEDS } from "../../constants";
 
 const { Option } = Select;
 
@@ -18,10 +19,22 @@ const HotelEditForm = ({
   handleImageChange,
   handleSubmit,
 }) => {
-  const { title, content, location, price, bed, from, to } = values;
+  const { title, content, location, price, bed, from, to, amenities } = values;
+  let amenitiesString = amenities ? amenities.split(",") : []
+    
+     
+
+  function onChange(checkedValues) {
+    setValues({ ...values, amenities: checkedValues.toString()})
+  }
 
   return (
+    <>
+    {/* { !title && <div>Loading</div>} */}
+
+    { title && 
     <form onSubmit={handleSubmit}>
+      
       <div className="form-group">
         <label className="btn btn-outline-secondary btn-block m-2 text-left">
           Image
@@ -80,10 +93,10 @@ const HotelEditForm = ({
           placeholder="Number of beds"
           value={bed}
         >
-          <Option key={1}>{1}</Option>
-          <Option key={2}>{2}</Option>
-          <Option key={3}>{3}</Option>
-          <Option key={4}>{4}</Option>
+         
+          {BEDS.map((bed) => (
+            <Option key={bed}>{bed}</Option>
+          ))}
         </Select>
       </div>
 
@@ -115,8 +128,12 @@ const HotelEditForm = ({
         />
       )}
 
-      <button className="btn btn-outline-primary m-2">Save</button>
-    </form>
+<Checkbox.Group options={AMENITIES} defaultValue={[...amenitiesString]} onChange={onChange} />
+
+      <button className="btn btn-outline-primary m-2">Update</button>
+    </form> 
+}
+    </>  
   );
 };
 
