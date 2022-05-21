@@ -11,8 +11,8 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
   const history = useHistory();
   return (
     <>
-      <div className="card mb-3" style={{width:'100%', background:'white'}}>
-        <div className="row no-gutters">
+      <div className="card mb-3 small-cards" style={{width:'100%', background:'white'}}>
+        <div className="no-gutters">
           <div className="col-md-4">
             {hotel.image && hotel.image.contentType ? (
               <img
@@ -39,7 +39,8 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
                   })}
                 </span>{" "}
               </h3>
-              <p className="alert alert-info">{hotel.location}</p>
+              <p className="hotel-location"> <i className="fa fa-map-marker" aria-hidden="true"></i>
+              &nbsp;{hotel.location}</p>
               <p className="card-text">{`${hotel.content.substring(
                 1,
                 200
@@ -50,9 +51,8 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
                   {diffDays(hotel.from, hotel.to) <= 1 ? " day" : " days"}
                 </span>
               </p>
-              <p className="card-text">{hotel.bed} bed</p>
               <p className="card-text">
-                Available from {new Date(hotel.from).toLocaleDateString()}
+                Available {hotel.bed} bed from {new Date(hotel.from).toLocaleDateString()}
               </p>
 
               {showModal && (

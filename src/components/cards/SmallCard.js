@@ -17,9 +17,9 @@ const SmallCard = ({
   const history = useHistory();
   return (
     <>
-      <div className="card mb-3 small-cards"  style={{width:'100%', background:'white'}}>
-        {/* <span><i class="fa fa-check" aria-hidden="true" style={{color:'green', fontSize:'24x'}}></i></span> */}
-        <div className="row no-gutters">
+      <div className="card mb-1 small-cards"  style={{width:'100%', background:'white'}}>
+        {/* <span><i className="fa fa-check" aria-hidden="true" style={{color:'green', fontSize:'24x'}}></i></span> */}
+        <div className="no-gutters">
           <div className="col-md-3">
             {h.image && h.image.contentType ? (
               <img
@@ -64,17 +64,17 @@ const SmallCard = ({
                 }
                 
               </h3>
-              <p className="alert alert-info">{h.location}</p>
-              <p className="card-text">{`${h.content.substring(0, 200)}...`}</p>
+              <p className="hotel-location"> <i className="fa fa-map-marker" aria-hidden="true"></i>
+              &nbsp;{h.location}</p>
+              <p className="card-text">{`${h.content.substring(0, 150)}...`}</p>
               <p className="card-text">
                 <span className="float-right text-primary">
                   for {diffDays(h.from, h.to)}{" "}
                   {diffDays(h.from, h.to) <= 1 ? " day" : " days"}
                 </span>
               </p>
-              <p className="card-text">{h.bed} bed</p>
               <p className="card-text">
-                Available from {new Date(h.from).toLocaleDateString()}
+                Available {h.bed} bed from {new Date(h.from).toLocaleDateString()}
               </p>
             </div>
           </div>
