@@ -535,4 +535,8 @@ a.btn-goback:hover {
 	.form-signin {
 		padding-right: 83px;
 	}
+
+	.login-form .frame {
+		height: 100vh;
+	}
 }

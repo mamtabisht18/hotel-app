@@ -9,3 +9,10 @@
     line-height: 18px !important;
   }
 
+  @media screen and (max-width: 600px) {
+    .payment-container .form-row{
+      flex-direction: column !important;
+    }
+  }
+
+  

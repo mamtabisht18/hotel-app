@@ -8,16 +8,9 @@ import CabsList from "./CabsList";
 const CabContainer = () => { 
 
   const notConnected = () => (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-10">
-           
-            <CabForm/>
-        </div>
-        <div className="col-md-12">
-        <CabsList/>
-        </div>
-      </div>
+    <div className="payment-container">
+      <CabForm/>
+      <CabsList/>
     </div>
   );
 
