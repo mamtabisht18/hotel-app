@@ -211,7 +211,7 @@
 
 .small-cards:hover{
   background-color: #cce4f5 !important;
-  border: 1px solid rgb(0, 124, 194); ;
+  border: 1px solid rgb(0, 124, 194);
   cursor: pointer !important;
 }
 
@@ -249,4 +249,20 @@
     width: 40%;
   }
 
+  .ap-dropdown-menu {
+    width:  350px !important;
+  }
  }    
+
+ .mobile-side-nav {
+   width: 95%;;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+ }
+
+ .mobile-side-nav .fa-bars {
+   color: rgb(0, 124, 194);
+   cursor: pointer;
+   font-size: 30px;
+ }
