@@ -18,6 +18,7 @@ const SmallCard = ({
   return (
     <>
       <div className="card mb-3 small-cards"  style={{width:'100%', background:'white'}}>
+        {/* <span><i class="fa fa-check" aria-hidden="true" style={{color:'green', fontSize:'24x'}}></i></span> */}
         <div className="row no-gutters">
           <div className="col-md-3">
             {h.image && h.image.contentType ? (
@@ -80,13 +81,13 @@ const SmallCard = ({
           <div className="col-md-3 d-flex justify-content-center align-items-center">
           <div className="w-100 d-flex justify-content-center align-items-center">
                 {showViewMoreButton && (
-                  // <button
-                  //   onClick={() => history.push(`/hotel/${h._id}`)}
-                  //   className="btn btn-primary"
-                  // >
-                  //   Show more
-                  // </button>
-                          <Button type="primary"  onClick={() => history.push(`/hotel/${h._id}`)} >Show more <RightOutlined  /></Button>
+                  <button
+                    onClick={() => history.push(`/hotel/${h._id}`)}
+                    className="show-more"
+                  >
+                    Show more <i className="fa fa-angle-right"></i>
+                  </button>
+                          
                 )}
                 {owner && (
                   <div>

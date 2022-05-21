@@ -110,7 +110,7 @@ import { currencyFormatter } from "../actions/stripe";
               <CardSecurityCode placeholder="CVV" className="input-text-pay semi" />
                     
             </div>
-            <button className="pay-btn">Submit</button>
+            <button className="pay-btn">Book</button>
           </form>
         </div>
         </div>

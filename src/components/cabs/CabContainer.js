@@ -24,8 +24,8 @@ const CabContainer = () => {
   return (
       
     <>
-    <div className="container-fluid bg-secondary p-5 nav-banner">
-        <ConnectNav />
+    <div className="container-fluid bg-secondary p-5 cab-banner">
+        {/* <ConnectNav /> */}
       </div>
       
          {notConnected()}

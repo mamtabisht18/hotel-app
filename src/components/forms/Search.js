@@ -62,7 +62,8 @@ const Search = () => {
 
       <SearchOutlined
         onClick={handleSubmit}
-        className="btn btn-primary p-3 btn-square"
+        className="show-more"
+        style={{borderRadius: '0px', color:'#fff',paddingTop:'16px'}}
       />
     </div>
   );
