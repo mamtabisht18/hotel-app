@@ -233,4 +233,20 @@
     padding-bottom: 10px;
   }
 
+  .payment-wrapper {
+    margin: 0 50px;
+  }
+
+  .payment-wrapper ,.input-text-pay {
+    padding: 0px;
+  }
+
+  .dashboard-top .col-md-10 {
+    width: 60%;
+  }
+
+  .dashboard-top .col-md-2 {
+    width: 40%;
+  }
+
  }    

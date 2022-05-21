@@ -520,8 +520,19 @@ a.btn-goback:hover {
 
 
 @media screen and (max-width: 600px) {
+	.login-form {
+		overflow: hidden;
+	}
 
 	.login-form img {
 	  height: 100%;
+	}
+
+	.login-form .p-5 {
+		padding: 0px !important;
+	}
+
+	.form-signin {
+		padding-right: 83px;
 	}
 }

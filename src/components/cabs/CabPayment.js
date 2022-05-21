@@ -22,6 +22,9 @@ const CabPayment = ({ match }) => {
     const hunel = new HunelCreditCard();
     const [route, setRoute] = useState({});
 
+    const values =  window.sessionStorage.getItem("cabDetails");
+     const { source, destination, distance, fair,time,departureDate } = JSON.parse(values);
+
 
     const { auth } = useSelector((state) => ({ ...state }));
     const { token } = auth;
@@ -31,8 +34,9 @@ const CabPayment = ({ match }) => {
 
   const loadRouteDetails = async () => {
     let res = fairArr.find(fairList => fairList.id == match.params.id)
-    if(res)
-    setRoute(res);
+    if(res) {
+      setRoute(res);
+    }    
   };
 
   const onBookHotel = async (priceToPaid) =>{
@@ -64,7 +68,7 @@ const CabPayment = ({ match }) => {
   return (
     <>
        <HunelProvider config={hunel}>
-    <Payment onBookHotel={onBookHotel} price={3000} />
+    <Payment onBookHotel={onBookHotel} price={fair} showDiscount={false} />
   </HunelProvider>, 
     </>
   );

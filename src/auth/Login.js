@@ -47,7 +47,6 @@ const Login = ({ history }) => {
     <>
       <div className="login-form">
         <img src={loginWallper} />
-        <div className="">
           <div className="p-5">
             <LoginForm
               handleSubmit={handleSubmit}
@@ -56,7 +55,6 @@ const Login = ({ history }) => {
               password={password}
               setPassword={setPassword}
             />
-          </div>
         </div>
       </div>
 

@@ -46,7 +46,7 @@ const DashboardSeller = () => {
 
   const connected = () => (
     <div className="container-fluid">
-      <div className="row">
+      <div className="row dashboard-top">
         <div className="col-md-10">
           <h2>Your Hotels</h2>
         </div>

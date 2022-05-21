@@ -27,7 +27,7 @@ const CabForm = () => {
   const history = useHistory()
   // redux
   const { auth } = useSelector((state) => ({ ...state }));
-  // const { token } = auth;
+  const { token } = auth;
   // state
   const [values, setValues] = useState({
     source: "",
@@ -38,6 +38,7 @@ const CabForm = () => {
     departureDate: "",
   });
   const [message, setMessage] = useState('')
+  const [routeId, setRouteId] = useState(0)
   
   // destructuring variables from state
   const { source, destination, distance, fair,time,departureDate } = values;
@@ -50,9 +51,10 @@ const CabForm = () => {
     }
     
     
-   
-    window.sessionStorage.setItem("cabDetails", JSON.stringify(values));    history.push(`/cabs/payment/1`);
-    return;
+    if(values.fair) {
+      window.sessionStorage.setItem("cabDetails", JSON.stringify(values));    history.push(`/cabs/payment/${routeId}`);
+      return;
+    }
 
     let formData = new FormData();
     formData.append("source", source);
@@ -62,16 +64,16 @@ const CabForm = () => {
     formData.append("time", time);
     formData.append("departureDate", departureDate);
 
-    // try {
-    //   let res = await bookCab(token, formData);
-    //   toast.success("Cab is booked");
-    //   setTimeout(() => {
-    //     window.location.reload();
-    //   }, 1000);
-    // } catch (err) {
-    //   console.log(err);
-    //   toast.error(err.response.data);
-    // }
+    try {
+      let res = await bookCab(token, formData);
+      toast.success("Cab is booked");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (err) {
+      console.log(err);
+      toast.error(err.response.data);
+    }
   };
 
 
@@ -96,6 +98,7 @@ const calculateFair = () => {
                 const result = fairArr.find(row => row.destionation === values.destination && row.source === values.source)
                 // console.log(result)
                 if(result){
+                  setRouteId(result.id)
                     const fair  = DISTANCE_DISCOUNT > result.distance  ? 0 : (result.distance -DISTANCE_DISCOUNT) * result.fairPerKm;
                     const distance  = result.distance;
                     let message = `Your total fair is ${currencyFormatter({

@@ -14,7 +14,7 @@ import { currencyFormatter } from "../actions/stripe";
 
 
 
-  function Payment({onBookHotel, price}) {
+  function Payment({onBookHotel, price, showDiscount = true}) {
     //useCardForm is a hook which returns a function.If this function calls,function returns credit card form data values and their validations
     const getFormData = useCardForm();
     const [numberValid, setNumberValid] = useState(true);
@@ -22,7 +22,7 @@ import { currencyFormatter } from "../actions/stripe";
 
     let priceToPaid =  price;
 
-    if(auth?.hotelCount) {
+    if(auth?.hotelCount && showDiscount) {
       priceToPaid = getDiscountedPrice(price);
     }
 
@@ -55,7 +55,7 @@ import { currencyFormatter } from "../actions/stripe";
 
                Your Bill amount is &nbsp;
                <b>
-               {auth?.hotelCount ? (
+               {auth?.hotelCount && showDiscount ? (
                  <>
                  <s>{currencyFormatter({
                     amount: price || 0,
@@ -83,7 +83,7 @@ import { currencyFormatter } from "../actions/stripe";
                 }
                 </b>
              </div>
-        <div className="col-md-4">
+        <div className="col-md-4 payment-wrapper">
         <Card fixClass="fix-new" cardClass="card-new" />
         </div>
 

@@ -32,7 +32,7 @@ const Dashboard = () => {
       </div>
 
       <div className="container-fluid">
-        <div className="row">
+        <div className="row dashboard-top">
           <div className="col-md-10">
             <h2>Your Bookings</h2>
           </div>

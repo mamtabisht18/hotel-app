@@ -42,9 +42,9 @@ const Search = () => {
 
       <RangePicker
         onChange={(value, dateString) => setDate(dateString)}
-        disabledDate={(current) =>
-          current && current.valueOf() < moment().subtract(1, "days")
-        }
+        // disabledDate={(current) =>
+        //   current && current.valueOf() < moment().subtract(1, "days")
+        // }
         className="w-100"
       />
 
@@ -54,6 +54,7 @@ const Search = () => {
         size="large"
         placeholder="Number of beds"
       >
+        <Option key={''}>---Select---</Option>
         <Option key={1}>{1}</Option>
         <Option key={2}>{2}</Option>
         <Option key={3}>{3}</Option>

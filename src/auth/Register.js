@@ -35,8 +35,6 @@ const Register = ({ history }) => {
 
       <div className="login-form">
       <img src={loginWallper} />
-
-        <div className="">
           <div className="p-5">
             <RegisterForm
               handleSubmit={handleSubmit}
@@ -48,7 +46,6 @@ const Register = ({ history }) => {
               setPassword={setPassword}
             />
           </div>
-        </div>
       </div>
     </>
   );
