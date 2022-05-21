@@ -168,22 +168,22 @@ const ViewHotel = ({ match, history }) => {
       }
       </p>
                   </div>
-                  <div class="hotel-detail">
-  <div class="hotel-detail-column">
-    <div class="hotel-detail-card">
+                  <div className="hotel-detail">
+  <div className="hotel-detail-column">
+    <div className="hotel-detail-card">
     <img src={image} alt={hotel.title} className="img img-fluid m-2 hotel-image" />    </div>
   </div>
 
-  <div class="hotel-detail-column">
-    <div class="hotel-detail-card amenities-card">
+  <div className="hotel-detail-column">
+    <div className="hotel-detail-card amenities-card">
       <div className="amenities-card-header">
       Amenities & Services
       </div>
       <div className="amenities-card-content">
-      <p><i class="fa fa-solid fa-wifi"></i>&nbsp;&nbsp;Free Internet</p>
-      <p><i class="fa fa-tint" aria-hidden="true"></i>&nbsp;&nbsp;Air Conditioning</p>
-      <p><i class="fa fa-solid fa-power-off"></i>&nbsp;&nbsp;Power backup</p>
-      <p><i class="fa fa-solid fa-user-md"></i>&nbsp;&nbsp;Doctor On Call</p>
+      <p><i className="fa fa-solid fa-wifi"></i>&nbsp;&nbsp;Free Internet</p>
+      <p><i className="fa fa-tint" aria-hidden="true"></i>&nbsp;&nbsp;Air Conditioning</p>
+      <p><i className="fa fa-solid fa-power-off"></i>&nbsp;&nbsp;Power backup</p>
+      <p><i className="fa fa-solid fa-user-md"></i>&nbsp;&nbsp;Doctor On Call</p>
       </div>
       <div className="amenities-card-footer">
       <div>
@@ -196,7 +196,7 @@ const ViewHotel = ({ match, history }) => {
     </div>
   </div>
   
-  <div class="hotel-detail-column">
+  <div className="hotel-detail-column">
     <div className="hotel-detail-card other-card">
       <div className="other-details-header">
           Booking & Other Details
@@ -219,7 +219,7 @@ const ViewHotel = ({ match, history }) => {
             <i>Posted by {hotel.postedBy && hotel.postedBy.name}</i>
       </div>
       <div className="other-details-footer">
-      <button
+      {auth?.user?._id !== hotel?.postedBy?._id  && <button
               onClick={handleClick}
               className="btn btn-block btn-lg btn-primary mt-3"
               disabled={loading || alreadyBooked}
@@ -231,15 +231,15 @@ const ViewHotel = ({ match, history }) => {
                 : auth && auth.token
                 ? "Book Now"
                 : "Login to Book"}
-            </button>
+            </button>}
       </div>
     
             
     </div>
   </div>
   
-  {/* <div class="hotel-detail-column">
-    <div class="hotel-detail-card">
+  {/* <div className="hotel-detail-column">
+    <div className="hotel-detail-card">
       <h3>Card 4</h3>
       <p>Some text</p>
       <p>Some text</p>
