@@ -517,3 +517,11 @@ a.btn-goback:hover {
 	fill: #1059ff;
 	transform: rotate(180deg);
 }
+
+
+@media screen and (max-width: 600px) {
+
+	.login-form img {
+	  height: 100%;
+	}
+}

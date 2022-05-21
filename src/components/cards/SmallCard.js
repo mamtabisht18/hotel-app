@@ -78,7 +78,7 @@ const SmallCard = ({
               </p>
             </div>
           </div>
-          <div className="col-md-3 d-flex justify-content-center align-items-center">
+          <div className="col-md-3 d-flex justify-content-center align-items-center extra-actions">
           <div className="w-100 d-flex justify-content-center align-items-center">
                 {showViewMoreButton && (
                   <button

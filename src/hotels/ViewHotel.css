@@ -16,19 +16,12 @@
     clear: both;
   }
   
-  /* Responsive columns */
-  @media screen and (max-width: 600px) {
-    .hotel-detail-column {
-      width: 100%;
-      display: block;
-      margin-bottom: 20px;
-    }
-  }
+  
   
   /* Style the counter cards */
   .hotel-detail-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 16px;
+    padding: 8px;
     text-align: center;
     /* background-color: #f1f1f1; */
     height: 400px;
@@ -102,4 +95,24 @@
 
   .hotel-title {
       padding: 20px 20px;
+  }
+
+  /* Responsive columns */
+  @media screen and (max-width: 600px) {
+    .hotel-detail-column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .hotel-detail-wrapper {
+      margin: 10px;
+     }
+
+     .amenities-card-header, .amenities-card-content,.amenities-card-footer,.other-details-header, .other-details-content,.other-details-footer {
+       text-align: center;
+     }
+
+     .amenities-card-footer {
+        flex-direction: column;
+     }
   }
