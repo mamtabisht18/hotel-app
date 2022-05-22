@@ -176,7 +176,7 @@ const ViewHotel = ({ match, history }) => {
             </div>
           </div>
 
-          { !alreadyBooked && <div className="hotel-detail-column">
+          { !alreadyBooked && auth && auth?.user?._id !== hotel?.postedBy?._id && <div className="hotel-detail-column">
             <div className="hotel-detail-card customize-booking">
               <div className="customize-booking-header">
                  Booking Details <small style={{color:'red'}}>(Mandatory)</small>
