@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Card } from "antd";
 import moment from "moment";
+import { getNameInitials } from "../helper";
 
 const { Meta } = Card;
 
@@ -31,21 +32,21 @@ const TopNav = () => {
 
   const handleResize = () => {
     if (window.innerWidth < 720) {
-        setIsMobile(true);
-        setShowFullMenu(false)      
+      setIsMobile(true);
+      setShowFullMenu(false)
     } else {
-        setIsMobile(false)
+      setIsMobile(false)
     }
   }
 
-  const handleMobileView = () =>{
+  const handleMobileView = () => {
     setShowFullMenu(!showFullMenu)
   }
 
   return (
     <div className="top-nav nav">
-      { isMobile && <div className="mobile-side-nav">
-      <NavLink exact={true} activeClassName='active' className="nav-link logo-link" to="/">
+      {isMobile && <div className="mobile-side-nav">
+        <NavLink exact={true} activeClassName='active' className="nav-link logo-link" to="/">
           <span className="first">
             Fi
           </span>
@@ -57,70 +58,70 @@ const TopNav = () => {
           </span>
         </NavLink>
         <div>
-        <i className="fa fa-bars" onClick={handleMobileView}></i>
+          <i className="fa fa-bars" onClick={handleMobileView}></i>
         </div>
-      </div> }
+      </div>}
       {showFullMenu && <>
-      <div className="d-flex justify-content-between align-items-center">
-      {!isMobile && <NavLink exact={true} activeClassName='active' className="nav-link logo-link" to="/">
-          <span className="first">
-            Fi
-          </span>
-          <span className="second">
-            no
-          </span>
-          <span className="third">
-            tel
-          </span>
-        </NavLink>}
+        <div className="d-flex justify-content-between align-items-center">
+          {!isMobile && <NavLink exact={true} activeClassName='active' className="nav-link logo-link" to="/">
+            <span className="first">
+              Fi
+            </span>
+            <span className="second">
+              no
+            </span>
+            <span className="third">
+              tel
+            </span>
+          </NavLink>}
 
-        {auth !== null && (
-          <>
-            <NavLink exact={true} activeClassName='active' className="nav-link" to="/">
-              <i className="fa fa-fw fa-home" /> {!isMobile && 'Home' }
-            </NavLink>
-            <NavLink className="nav-link" to="/dashboard">
-              <i className="fa fa-dashboard"></i> {!isMobile && 'Dashboard' }
-            </NavLink>
-            {auth.hotelCount ? (<NavLink className="nav-link" to="/cabs">
-              <i className="fa fa-cab"></i> {!isMobile && 'Cabs' }
-            </NavLink>) : ''}
-          </>
-        )}
+          {auth !== null && (
+            <>
+              <NavLink exact={true} activeClassName='active' className="nav-link" to="/">
+                <i className="fa fa-fw fa-home" /> {!isMobile && 'Home'}
+              </NavLink>
+              <NavLink className="nav-link" to="/dashboard">
+                <i className="fa fa-dashboard"></i> {!isMobile && 'Dashboard'}
+              </NavLink>
+              {auth.hotelCount ? (<NavLink className="nav-link" to="/cabs">
+                <i className="fa fa-cab"></i> {!isMobile && 'Cabs'}
+              </NavLink>) : ''}
+            </>
+          )}
 
-      </div>
+        </div>
 
-      <div className="d-flex justify-content-between align-items-center right-nav">
+        <div className="d-flex justify-content-between align-items-center right-nav">
 
-        {auth === null && (
-          <>
-            <NavLink className="nav-link" to="/login">
-              <i className="fa fa-fw fa-user"></i>Login
-            </NavLink>
-            <NavLink className="nav-link" to="/register">
-              <i className="fa fa-user-plus"></i> Register
-            </NavLink>
-          </>
-        )}
-        {auth !== null && (
-          <>       
-            <span className="rounded-avatar"
-            height="22">{auth.user.name[0]}B</span>
-            &nbsp;
-            <div className="user-info">
-            <span>{auth.user.name}</span>
-            <small>Joined {moment(auth.user.createdAt).fromNow()}</small>
-            </div>
-          
-            <a className="nav-link pointer" href="#" onClick={logout}>
-              <i className="fa fa-sign-out"></i> {!isMobile && 'Logout' }
-            </a>
-          </>
+          {auth === null && (
+            <>
+              <NavLink className="nav-link" to="/login">
+                <i className="fa fa-fw fa-user"></i>Login
+              </NavLink>
+              <NavLink className="nav-link" to="/register">
+                <i className="fa fa-user-plus"></i> Register
+              </NavLink>
+            </>
+          )}
+          {auth !== null && (
+            <>
+              <span className="rounded-avatar"
+                height="22">{getNameInitials(auth.user.name)}</span>
+              &nbsp;
+              <div className="user-info">
+                <span>{auth.user.name}</span>
+                <small>Joined {moment(auth.user.createdAt).fromNow()}</small>
+              </div>
 
-        )}
-      </div>
+              <a className="nav-link pointer" href="#" onClick={logout}>
+                <i className="fa fa-sign-out"></i> {!isMobile && 'Logout'}
+              </a>
+            </>
 
-          </>}
+          )}
+        </div>
+
+      </>}
 
     </div>
   );
