@@ -5,7 +5,7 @@ import { currencyFormatter } from "../../actions/stripe";
 import { diffDays } from "../../actions/hotel";
 import OrderModal from "../modals/OrderModal";
 
-const BookingCard = ({ hotel, session, orderedBy }) => {
+const BookingCard = ({ hotel, session, orderedBy,bookingDetails }) => {
   const [showModal, setShowModal] = useState(false);
 
   const history = useHistory();
@@ -58,6 +58,7 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
               {showModal && (
                 <OrderModal
                   session={session}
+                  bookingDetails ={bookingDetails}
                   orderedBy={orderedBy}
                   showModal={showModal}
                   setShowModal={setShowModal}
@@ -69,7 +70,7 @@ const BookingCard = ({ hotel, session, orderedBy }) => {
                   onClick={() => setShowModal(!showModal)}
                   className="btn btn-primary"
                 >
-                  Show Payment info
+                  Show Booking info
                 </button>
               </div>
             </div>

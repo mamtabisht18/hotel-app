@@ -23,6 +23,7 @@ const Dashboard = () => {
     setIsLoading(true)
     const res = await userHotelBookings(token);
     setBooking(res.data);
+    console.log(res.data)
     setIsLoading(false)
   };
 
@@ -57,6 +58,7 @@ const Dashboard = () => {
             key={b._id}
             hotel={b.hotel}
             session={b.session}
+            bookingDetails={b.bookingDetails}
             orderedBy={b.orderedBy}
           />
         ))}

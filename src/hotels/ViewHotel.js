@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { read, diffDays, isAlreadyBooked, getDiscountedPrice } from "../actions/hotel";
-import { currencyFormatter } from "../actions/stripe";
 import moment from "moment";
 import { useSelector } from "react-redux";
+import { DatePicker, Select } from "antd";
 
+
+import { currencyFormatter } from "../actions/stripe";
+import { AMENITIES, BEDS } from "../constants";
 import './ViewHotel.css'
-import { AMENITIES } from "../constants";
+
+const { Option } = Select;
+
 
 const ViewHotel = ({ match, history }) => {
   const [hotel, setHotel] = useState({});
+  const [bookingDetails, setBookingDetails] = useState();
   const [image, setImage] = useState("");
   const [amenities, setAmenities] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -35,6 +41,9 @@ const ViewHotel = ({ match, history }) => {
     if (res.data?.amenities) {
       setAmenities(res.data.amenities.split(""))
     }
+    // if (res.data?.to) {
+    //   setBookingDetails({...bookingDetails, from: moment(new Date(), "YYYY-MM-DD"), to:moment(res.data.to, "YYYY-MM-DD"), bed: res.data.bed })
+    // }
     setImage(`${process.env.REACT_APP_API}/hotel/image/${res.data._id}`);
   };
 
@@ -47,7 +56,9 @@ const ViewHotel = ({ match, history }) => {
     }
 
     setLoading(true);
-    if (!auth) history.push("/login");
+    if (!auth)  { history.push("/login"); return; }
+    
+    window.sessionStorage.setItem("bookingDetails", JSON.stringify(bookingDetails));
     history.push(`/payment/${hotel._id}`);
   };
 
@@ -165,16 +176,70 @@ const ViewHotel = ({ match, history }) => {
             </div>
           </div>
 
-          {/* <div className="hotel-detail-column">
-    <div className="hotel-detail-card">
-      <h3>Card 4</h3>
-      <p>Some text</p>
-      <p>Some text</p>
-    </div>
-  </div> */}
+          { !alreadyBooked && <div className="hotel-detail-column">
+            <div className="hotel-detail-card customize-booking">
+              <div className="customize-booking-header">
+                 Booking Details <small style={{color:'red'}}>(Mandatory)</small>
+              </div>
+              <div className="customize-booking-content">
+                <Select
+                  onChange={(value) => setBookingDetails({ ...bookingDetails, bed: value })}
+                  className="w-100 m-2"
+                  size="large"
+                  placeholder="Number of beds"
+                  // value={hotel.bed}
+                >
+
+                  {BEDS.map((bed) => {
+                    if(hotel.bed >= bed) {
+                      return (<Option key={bed}>{bed}</Option>)
+                    }
+                   
+                  })}
+                </Select>
+
+                {hotel.from && (
+                <DatePicker
+                  // defaultValue={moment(new Date(), "YYYY-MM-DD")}
+                  placeholder="From date"
+                  className="form-control m-2"
+                onChange={(date, dateString) =>
+                  setBookingDetails({ ...bookingDetails, from: dateString })
+                }
+                disabledDate={(current) =>
+                  {   
+                    return (current && current.valueOf() < moment().subtract(1, "days") || current && current.valueOf() > moment(hotel.to).add(1, "days")) }
+                }
+                
+                />
+              )}
+
+              {hotel.to && (
+                <DatePicker
+                  // defaultValue={moment(new Date(), "YYYY-MM-DD")}
+                  placeholder="To date"
+                  className="form-control m-2"
+                  onChange={(date, dateString) =>
+                  setBookingDetails({ ...bookingDetails, to: dateString })
+                }
+                disabledDate={(current) =>
+                  {   
+                    return current && current.valueOf() > moment(hotel.to).add(1, "days") }
+                }
+                />
+              )}
+              </div>
+              <div className="customize-booking-footer">
+              {/* <button
+                  className="btn btn-block btn-lg btn-primary mt-3"
+                >
+                  See Availability
+                </button> */}
+              </div>
+            </div>
+          </div>}
         </div>
       </div>
-
 
     </>
   );

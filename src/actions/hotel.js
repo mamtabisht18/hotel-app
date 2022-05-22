@@ -101,8 +101,8 @@ export const searchListings = async (query) =>
 // export const searchListings = async (query) =>  searchHotels(query)
  
 
-export const bookHotel = async (token, hotelId, amount) =>
-  await axios.post(`${process.env.REACT_APP_API}/book-hotel`,{hotelId, amount}, {
+export const bookHotel = async (token, hotelId, amount, bookingDetails) =>
+  await axios.post(`${process.env.REACT_APP_API}/book-hotel`,{hotelId, amount, bookingDetails}, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
