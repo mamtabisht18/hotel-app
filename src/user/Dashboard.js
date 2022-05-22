@@ -1,9 +1,10 @@
+import { useState, useEffect } from "react";
 import DashboardNav from "../components/DashboardNav";
-import ConnectNav from "../components/ConnectNav";
 import { Link } from "react-router-dom";
+import { Spin, Space } from 'antd';
+
 import { userHotelBookings } from "../actions/hotel";
 import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import BookingCard from "../components/cards/BookingCard";
 
 const Dashboard = () => {
@@ -11,14 +12,17 @@ const Dashboard = () => {
     auth: { token },
   } = useSelector((state) => ({ ...state }));
   const [booking, setBooking] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     loadUserBookings();
   }, []);
 
   const loadUserBookings = async () => {
+    setIsLoading(true)
     const res = await userHotelBookings(token);
     setBooking(res.data);
+    setIsLoading(false)
   };
 
   return (
@@ -44,7 +48,10 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="row">
+      <div className="row dashboard-content">
+      {isLoading &&  <Space size="middle"  className="spinner">
+            <Spin size="large" />
+          </Space>}
         {booking.map((b) => (
           <BookingCard
             key={b._id}

@@ -221,6 +221,31 @@
   max-height: 100%
 }
 
+.mobile-side-nav {
+  width: 95%;;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-side-nav .fa-bars {
+  color: rgb(0, 124, 194);
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.home-content,.dashboard-content {
+  position: relative;
+}
+
+.spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 200px;
+  
+}
+
  /* Responsive columns */
  @media screen and (max-width: 600px) {
 
@@ -254,15 +279,4 @@
   }
  }    
 
- .mobile-side-nav {
-   width: 95%;;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
- }
-
- .mobile-side-nav .fa-bars {
-   color: rgb(0, 124, 194);
-   cursor: pointer;
-   font-size: 30px;
- }
+ 

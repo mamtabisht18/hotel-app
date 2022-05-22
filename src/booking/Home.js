@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { Spin, Space } from 'antd';
 
 
 import { allHotels, deleteHotel, userHotelBookings } from "../actions/hotel";
@@ -9,6 +10,7 @@ import Search from "../components/forms/Search";
 
 const Home = () => {
   const [hotels, setHotels] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const { auth } = useSelector((state) => ({ ...state }));
   
 
@@ -26,8 +28,11 @@ const Home = () => {
   };
 
   const loadAllhotels = async () => {
-    let res = await allHotels();
+    setIsLoading(true)
+     let res = await allHotels();
     setHotels(res.data);
+    setIsLoading(false)
+   
   };  
 
   return (
@@ -39,7 +44,10 @@ const Home = () => {
         <br />
         <Search />
       </div>
-      <div className="container-fluid">
+      <div className="container-fluid home-content">
+          {isLoading &&  <Space size="middle"  className="spinner">
+            <Spin size="large" />
+          </Space>}
         <br />
         {hotels.map((h) => (
           <SmallCard key={h._id} h={h}  showViewMoreButton={!(h.postedBy._id === auth?.user._id)} owner={h.postedBy._id === auth?.user._id} handleHotelDelete={handleHotelDelete}/>
