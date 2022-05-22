@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import moment from 'moment';
-
 import { Table, Tag } from 'antd';
+
 import { allBookedCabs } from '../../actions/cab';
 
 const COLUMNS = [

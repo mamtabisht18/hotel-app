@@ -3,25 +3,18 @@ import { toast } from "react-toastify";
 import {  DatePicker, Select,TimePicker } from "antd";
 import { useSelector } from "react-redux";
 import moment from 'moment';
+import { useHistory } from "react-router-dom";
+
+
 import { currencyFormatter } from "../../actions/stripe";
 import { bookCab } from "../../actions/cab";
+import { CABS_FAIR_DATA, DISTANCE_DISCOUNT } from "../../constants";
 
 import  './cabForm.css'
-import { useHistory } from "react-router-dom";
 
 const format = 'h:mm a';
 const { Option } = Select;
 
-const DISTANCE_DISCOUNT = 25;
-
-const fairArr = [
-    {id: 1,source: "Mansarovar", destionation: "Mahesh Nagar", distance: 10, fairPerKm: 10 },
-    {id: 2,source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
-    {id: 3,source: "Mansarovar", destionation: "Bagru", distance: 50, fairPerKm: 10},
-    {id: 4,source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
-    {id: 5,source: "Sodala", destionation: "Vaishali", distance: 100, fairPerKm: 10},
-    {id: 6,source: "Sodala", destionation: "Mahesh Nagar", distance: 20, fairPerKm: 10},
-]
 
 const CabForm = () => {
   const history = useHistory()
@@ -49,7 +42,6 @@ const CabForm = () => {
       history.push("/login");
       return;
     }
-    
     
     if(values.fair) {
       window.sessionStorage.setItem("cabDetails", JSON.stringify(values));    history.push(`/cabs/payment/${routeId}`);
@@ -95,7 +87,7 @@ const CabForm = () => {
 
 const calculateFair = () => {
    if(values.destination && values.source) {
-                const result = fairArr.find(row => row.destionation === values.destination && row.source === values.source)
+                const result = CABS_FAIR_DATA.find(row => row.destionation === values.destination && row.source === values.source)
                 // console.log(result)
                 if(result){
                   setRouteId(result.id)
@@ -134,6 +126,7 @@ const calculateFair = () => {
     <Option key={"Mansarovar"}>Mansarovar</Option>
     <Option key={"Sodala"}>Sodala</Option>
   </Select>
+  
   </div>
   <div className="form-group col-md-2">
   <Select

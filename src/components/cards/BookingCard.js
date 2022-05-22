@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 import { currencyFormatter } from "../../actions/stripe";
 import { diffDays } from "../../actions/hotel";
-import { useHistory, Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import OrderModal from "../modals/OrderModal";
 
 const BookingCard = ({ hotel, session, orderedBy }) => {

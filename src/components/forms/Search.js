@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { DatePicker, Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import AlgoliaPlaces from "algolia-places-react";
-import moment from "moment";
 import { useHistory } from "react-router-dom";
+
 import { BEDS } from "../../constants";
 
 // destructure values from ant components

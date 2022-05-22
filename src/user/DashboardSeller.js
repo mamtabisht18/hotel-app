@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import DashboardNav from "../components/DashboardNav";
-import ConnectNav from "../components/ConnectNav";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { HomeOutlined } from "@ant-design/icons";
-import { createConnectAccount } from "../actions/stripe";
-import { sellerHotels, deleteHotel } from "../actions/hotel";
 import { toast } from "react-toastify";
+
+
+import DashboardNav from "../components/DashboardNav";
+import { sellerHotels, deleteHotel } from "../actions/hotel";
 import SmallCard from "../components/cards/SmallCard";
 
 const DashboardSeller = () => {
@@ -105,7 +105,6 @@ const DashboardSeller = () => {
   return (
     <>
       <div className="container-fluid bg-secondary p-5 nav-banner">
-        {/* <ConnectNav /> */}
       </div>
 
       <div className="container-fluid p-4">
@@ -114,12 +113,8 @@ const DashboardSeller = () => {
 
       {auth &&
       auth.user
-      // && auth.user.stripe_seller &&
-      // auth.user.stripe_seller.charges_enabled
         ? connected()
         : notConnected()}
-
-      {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
     </>
   );
 };

@@ -1,7 +1,3 @@
-import { CarOutlined  } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import ConnectNav from "../ConnectNav";
-import DashboardNav from "../DashboardNav";
 import CabForm from "./CabForm";
 import CabsList from "./CabsList";
 
@@ -18,8 +14,7 @@ const CabContainer = () => {
       
     <>
     <div className="container-fluid bg-secondary p-5 cab-banner">
-        {/* <ConnectNav /> */}
-      </div>
+    </div>
       
          {notConnected()}
 

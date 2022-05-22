@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { Spin, Space } from 'antd';
 
 
-import { allHotels, deleteHotel, userHotelBookings } from "../actions/hotel";
+import { allHotels, deleteHotel } from "../actions/hotel";
 import SmallCard from "../components/cards/SmallCard";
 import Search from "../components/forms/Search";
 

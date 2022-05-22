@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Card, Avatar, Badge } from "antd";
+import { Card } from "antd";
 import moment from "moment";
 
 const { Meta } = Card;
@@ -111,9 +111,6 @@ const TopNav = () => {
             <span>{auth.user.name}</span>
             <small>Joined {moment(auth.user.createdAt).fromNow()}</small>
             </div>
-
-         
-      
           
             <a className="nav-link pointer" href="#" onClick={logout}>
               <i className="fa fa-sign-out"></i> {!isMobile && 'Logout' }

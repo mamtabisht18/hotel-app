@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 
-import { allHotels, bookHotel, read } from "../actions/hotel";
-import SmallCard from "../components/cards/SmallCard";
-import Search from "../components/forms/Search";
+import { bookHotel, read } from "../actions/hotel";
 import { HunelProvider, HunelCreditCard } from "reactjs-credit-card";
 
 import Payment from "./Payment";

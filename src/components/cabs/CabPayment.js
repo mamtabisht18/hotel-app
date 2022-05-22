@@ -1,22 +1,12 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-
 import { HunelProvider, HunelCreditCard } from "reactjs-credit-card";
 
 import { useSelector } from "react-redux";
 import Payment from "../../booking/Payment";
 import { bookCab } from "../../actions/cab";
+import { CABS_FAIR_DATA } from "../../constants";
 
-
-const fairArr = [
-    {id: 1,source: "Mansarovar", destionation: "Mahesh Nagar", distance: 10, fairPerKm: 10 },
-    {id: 2,source: "Mansarovar", destionation: "Vaishali", distance: 30, fairPerKm: 10},
-    {id: 3,source: "Mansarovar", destionation: "Bagru", distance: 50, fairPerKm: 10},
-    {id: 4,source: "Sodala", destionation: "Bagru", distance: 100, fairPerKm: 10},
-    {id: 5,source: "Sodala", destionation: "Vaishali", distance: 100, fairPerKm: 10},
-    {id: 6,source: "Sodala", destionation: "Mahesh Nagar", distance: 20, fairPerKm: 10},
-]
 
 const CabPayment = ({ match }) => {
     const hunel = new HunelCreditCard();
@@ -33,7 +23,7 @@ const CabPayment = ({ match }) => {
   }, []);
 
   const loadRouteDetails = async () => {
-    let res = fairArr.find(fairList => fairList.id == match.params.id)
+    let res = CABS_FAIR_DATA.find(fairList => fairList.id == match.params.id)
     if(res) {
       setRoute(res);
     }    

@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import DashboardNav from "../components/DashboardNav";
 import { Link } from "react-router-dom";
 import { Spin, Space } from 'antd';
-
-import { userHotelBookings } from "../actions/hotel";
 import { useSelector } from "react-redux";
+
+
+import DashboardNav from "../components/DashboardNav";
+import { userHotelBookings } from "../actions/hotel";
 import BookingCard from "../components/cards/BookingCard";
 
 const Dashboard = () => {
@@ -28,7 +29,6 @@ const Dashboard = () => {
   return (
     <>
       <div className="container-fluid bg-secondary p-5 nav-banner">
-        {/* <ConnectNav /> */}
       </div>
 
       <div className="container-fluid p-4">
@@ -49,7 +49,7 @@ const Dashboard = () => {
       </div>
 
       <div className="row dashboard-content">
-      {isLoading &&  <Space size="middle"  className="spinner">
+      {isLoading && <Space size="middle"  className="spinner">
             <Spin size="large" />
           </Space>}
         {booking.map((b) => (

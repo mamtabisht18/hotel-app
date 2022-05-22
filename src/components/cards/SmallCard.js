@@ -1,9 +1,9 @@
-import { currencyFormatter } from "../../actions/stripe";
-import { diffDays, getDiscountedPrice } from "../../actions/hotel";
 import { useHistory, Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined, RightOutlined  } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined  } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { Button } from "antd";
+
+import { diffDays, getDiscountedPrice } from "../../actions/hotel";
+import { currencyFormatter } from "../../actions/stripe";
 
 const SmallCard = ({
   h,

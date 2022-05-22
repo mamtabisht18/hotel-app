@@ -1,9 +1,8 @@
 import { useState } from "react";
 import RegisterForm from "../components/RegisterForm";
-import axios from "axios";
 import { toast } from "react-toastify";
-import { register } from "../actions/auth";
 
+import { register } from "../actions/auth";
 import loginWallper from '../assets/login-backg.jpg'
 
 
@@ -20,7 +19,6 @@ const Register = ({ history }) => {
         email,
         password,
       });
-      console.log("REGISTER USER ===> ", res);
       toast.success("Register success. Please login.");
       history.push("/login");
     } catch (err) {
@@ -31,21 +29,19 @@ const Register = ({ history }) => {
 
   return (
     <>
-      
-
       <div className="login-form">
-      <img src={loginWallper} />
-          <div className="p-5">
-            <RegisterForm
-              handleSubmit={handleSubmit}
-              name={name}
-              setName={setName}
-              email={email}
-              setEmail={setEmail}
-              password={password}
-              setPassword={setPassword}
-            />
-          </div>
+        <img src={loginWallper} />
+        <div className="p-5">
+          <RegisterForm
+            handleSubmit={handleSubmit}
+            name={name}
+            setName={setName}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+          />
+        </div>
       </div>
     </>
   );

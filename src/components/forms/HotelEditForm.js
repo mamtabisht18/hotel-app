@@ -1,6 +1,7 @@
 import AlgoliaPlaces from "algolia-places-react";
 import { Checkbox, DatePicker, Select } from "antd";
 import moment from "moment";
+
 import { AMENITIES, BEDS } from "../../constants";
 
 const { Option } = Select;

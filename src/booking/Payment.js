@@ -9,10 +9,9 @@ import {
   import { useCardForm } from "reactjs-credit-card";
   import { useState } from "react";
   import { useSelector } from "react-redux";
+
 import { getDiscountedPrice } from "../actions/hotel";
 import { currencyFormatter } from "../actions/stripe";
-
-
 
   function Payment({onBookHotel, price, showDiscount = true}) {
     //useCardForm is a hook which returns a function.If this function calls,function returns credit card form data values and their validations
