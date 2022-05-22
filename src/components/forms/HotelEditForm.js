@@ -82,7 +82,7 @@ const HotelEditForm = ({
           type="number"
           name="price"
           onChange={handleChange}
-          placeholder="Price"
+          placeholder="Price per bed"
           className="form-control m-2"
           value={price}
         />

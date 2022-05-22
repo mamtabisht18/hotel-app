@@ -1,8 +1,4 @@
 import axios from "axios";
-import { getSelectedHotel, HOTELS_MOCK } from "../mocks/hotel";
-import { searchHotels } from "../mocks/search-hotels";
-import { SELLERS_HOTELS_MOCK } from "../mocks/sellers.hotels";
-import { BOOKINGS_HOTELS_MOCK } from "../mocks/user-bookings";
 
 export const createHotel = async (token, data) =>
   await axios.post(`${process.env.REACT_APP_API}/create-hotel`, data, {
@@ -14,7 +10,6 @@ export const createHotel = async (token, data) =>
 export const allHotels = async () =>
   await axios.get(`${process.env.REACT_APP_API}/hotels`);
 
-// export const allHotels = async () => HOTELS_MOCK
 
 
 export const diffDays = (from, to) => {
@@ -43,9 +38,6 @@ export const sellerHotels = async (token) =>
     },
   });
 
-// export const sellerHotels = async (token) => {
-//   return SELLERS_HOTELS_MOCK
-// }
 
 export const deleteHotel = async (token, hotelId) =>
   await axios.delete(`${process.env.REACT_APP_API}/delete-hotel/${hotelId}`, {
@@ -57,7 +49,6 @@ export const deleteHotel = async (token, hotelId) =>
 export const read = async (hotelId) =>
   await axios.get(`${process.env.REACT_APP_API}/hotel/${hotelId}`);
 
-  // export const read = async (hotelId) => getSelectedHotel(hotelId)
   
 
 export const updateHotel = async (token, data, hotelId) =>
@@ -78,7 +69,6 @@ export const userHotelBookings = async (token) =>
     },
   });
 
-// export const userHotelBookings = async (token) => BOOKINGS_HOTELS_MOCK
 
 export const isAlreadyBooked = async (token, hotelId) =>
   await axios.get(`${process.env.REACT_APP_API}/is-already-booked/${hotelId}`, {
@@ -87,18 +77,11 @@ export const isAlreadyBooked = async (token, hotelId) =>
     },
   });
 
-// export const isAlreadyBooked = async (token, hotelId) => {
-//   return {
-//     data: {
-//       ok: false
-//     }
-//   }
-// }
+
 
 export const searchListings = async (query) =>
   await axios.post(`${process.env.REACT_APP_API}/search-listings`, query);
 
-// export const searchListings = async (query) =>  searchHotels(query)
  
 
 export const bookHotel = async (token, hotelId, amount, bookingDetails) =>

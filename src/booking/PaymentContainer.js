@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 
 import { bookHotel, read } from "../actions/hotel";
 import { HunelProvider, HunelCreditCard } from "reactjs-credit-card";
@@ -11,9 +10,10 @@ import { useSelector } from "react-redux";
 const PaymentContainer = ({ match, type="hotelBooking" }) => {
     const hunel = new HunelCreditCard();
     const [hotel, setHotel] = useState({});
+    const [finalAmount, setFinalAmount] = useState(0);
+    
 
     const { auth } = useSelector((state) => ({ ...state }));
-    const dispatch = useDispatch();
 
   useEffect(() => {
     loadSellerHotel();
@@ -21,7 +21,12 @@ const PaymentContainer = ({ match, type="hotelBooking" }) => {
 
   const loadSellerHotel = async () => {
     let res = await read(match.params.hotelId);
+    let bookingDetails =  {}    
     setHotel(res.data);
+    if(res?.data && window.sessionStorage.getItem("bookingDetails")) {
+      bookingDetails = JSON.parse(window.sessionStorage.getItem("bookingDetails"));
+      setFinalAmount(parseInt(bookingDetails.bed) * res.data.price)
+    }
   };
 
   const onBookHotel = async (priceToPaid) =>{
@@ -42,7 +47,7 @@ const PaymentContainer = ({ match, type="hotelBooking" }) => {
   return (
     <>
        <HunelProvider config={hunel}>
-    <Payment onBookHotel={onBookHotel} price={hotel.price} />
+    <Payment onBookHotel={onBookHotel} price={finalAmount} />
   </HunelProvider>, 
     </>
   );

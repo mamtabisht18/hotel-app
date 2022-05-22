@@ -187,20 +187,17 @@ const ViewHotel = ({ match, history }) => {
                   className="w-100 m-2"
                   size="large"
                   placeholder="Number of beds"
-                  // value={hotel.bed}
                 >
 
                   {BEDS.map((bed) => {
                     if(hotel.bed >= bed) {
                       return (<Option key={bed}>{bed}</Option>)
-                    }
-                   
+                    }                   
                   })}
                 </Select>
 
                 {hotel.from && (
                 <DatePicker
-                  // defaultValue={moment(new Date(), "YYYY-MM-DD")}
                   placeholder="From date"
                   className="form-control m-2"
                 onChange={(date, dateString) =>
@@ -216,7 +213,6 @@ const ViewHotel = ({ match, history }) => {
 
               {hotel.to && (
                 <DatePicker
-                  // defaultValue={moment(new Date(), "YYYY-MM-DD")}
                   placeholder="To date"
                   className="form-control m-2"
                   onChange={(date, dateString) =>

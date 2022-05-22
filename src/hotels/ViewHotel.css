@@ -63,20 +63,26 @@
   .other-card {
     display: flex;
     flex-direction: column;
-    border: 0.1rem solid rgb(232, 243, 255)
+    border: 0.1rem solid rgb(232, 243, 255);
+    text-align: left;
 }
 
-.other-details-header {
-  padding: 10px 0px;
-    text-align: left;
+.other-details-header, .customize-booking-header {
+    padding: 10px 0px;
     font-weight: bold;
     border-bottom:0.1rem solid rgb(232, 243, 255)
 }
 
-.other-details-content {
+.other-details-content, .customize-booking-content{
     padding: 10px 0px;
     text-align: left;
 }
+
+.customize-booking-content{
+  padding-right:15px
+}
+
+
 
 .other-details-footer {
   text-align: center;
@@ -87,6 +93,15 @@
   padding: 0 10px 10px 10px;
 }
 
+.customize-booking {
+  display: flex;
+  flex-direction: column;
+  border: 0.1rem solid rgb(232, 243, 255);
+  text-align: left;
+}
+
+
+
   .hotel-detail-wrapper {
       display: flex;
       flex-direction: column;
@@ -96,6 +111,7 @@
   .hotel-title {
       padding: 20px 20px;
   }
+  
 
   /* Responsive columns */
   @media screen and (max-width: 600px) {
@@ -116,3 +132,4 @@
         flex-direction: column;
      }
   }
+
